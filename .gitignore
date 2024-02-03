@@ -1,0 +1,4 @@
+*.o
+.vscode
+./a.out
+./libft_malloc_x86_64.so
