@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_malloc.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 21:32:13 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/02/02 21:37:19 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/02/03 12:28:41 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_malloc.h"
+#include "ft_ls.h"
 
-void	*malloc(size_t size)
+int	main(int argc, char **argv)
 {
-	(void)size;
-	return (NULL);
+	(void)argc;
+	(void)argv;
+	ft_printf("hello\n");
+	return (0);
 }
