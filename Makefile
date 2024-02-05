@@ -6,20 +6,24 @@
 #    By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/03 10:37:21 by ugdaniel          #+#    #+#              #
-#    Updated: 2024/02/03 12:31:55 by ugdaniel         ###   ########.fr        #
+#    Updated: 2024/02/05 12:21:56 by ugdaniel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= ft_ls
+NAME = ft_ls
 
-SRCS 	= srcs/main.c
-OBJS	= $(SRCS:.c=.o)
-INCLUDE	= -I include
-INCLUDE	+= -I libft/include
+CC = clang
+CFLAGS = -Wall -Wextra -Werror
 
-CC		= clang
-CFLAGS	= -Wall -Wextra -Werror
-LIBS	= libft/libft.a
+SRCS  = srcs/main.c
+OBJS = $(SRCS:.c=.o)
+
+LIBFT_DIR = libft
+LIBFT = $(LIBFT_DIR)/libft.a
+
+INCLUDE = -I include -I $(LIBFT_DIR)/include
+
+LIBS = $(LIBFT)
 
 __default = \033[39m
 __green = \033[92m
@@ -34,23 +38,30 @@ ifndef verbose
   SILENT = @
 endif
 
-all: $(NAME)
+all: $(LIBFT) $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "Linking $(NAME)$(__default)"
 	$(SILENT)$(CC) -o $@ $^ $(LIBS)
 	@echo "$(__green)Successfully built $(NAME)$(__default)"
 
+$(LIBFT):
+	@echo "$(__default)Compiling Libft"
+	$(SILENT)make --no-print-directory -C $(LIBFT_DIR)
+
+clean_libft:
+	$(SILENT)make --no-print-directory verbose=$(verbose) fclean -C $(LIBFT_DIR)
+
 .c.o:
-	@echo "Compiling $<$(__default)"
+	@echo "$(__default)Compiling $<"
 	$(SILENT)mkdir -p $(dir $@)
 	$(SILENT)$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
-	@rm -f $(OBJS)
+	$(SILENT)rm -f $(OBJS)
 
-fclean: clean
-	@rm -f $(NAME)
+fclean: clean clean_libft
+	$(SILENT)rm -f $(NAME)
 
 re: fclean all
 
