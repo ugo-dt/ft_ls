@@ -1,6 +1,7 @@
 *.o
 .vscode
 a.out
-./a.out
 ft_ls
-./ft_ls
+test.sh
+test
+todo

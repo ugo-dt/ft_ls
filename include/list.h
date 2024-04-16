@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.h                                            :+:      :+:    :+:   */
+/*   list.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/02 21:21:39 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/02/14 16:36:24 by ugdaniel         ###   ########.fr       */
+/*   Created: 2024/02/14 16:31:58 by ugdaniel          #+#    #+#             */
+/*   Updated: 2024/02/16 17:04:22 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LS_H
-# define FT_LS_H
+#ifndef LIST_H
+# define LIST_H
 
 # include "entry.h"
-# include "file.h"
-# include "list.h"
 # include "parser.h"
-# include "state.h"
+# include "directory.h"
 
-#endif // FT_LS_H
+# include <libft.h>
+
+void	add_element(t_list **list, struct Entry *content);
+void	reverse_list(t_list **list);
+void	list_contents(t_list *list, int *recursion);
+
+#endif // LIST_H

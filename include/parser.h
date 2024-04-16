@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.h                                            :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/02 21:21:39 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/02/14 16:36:24 by ugdaniel         ###   ########.fr       */
+/*   Created: 2024/02/14 16:22:37 by ugdaniel          #+#    #+#             */
+/*   Updated: 2024/02/14 16:38:39 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LS_H
-# define FT_LS_H
+#ifndef PARSER_H
+# define PARSER_H
 
 # include "entry.h"
 # include "file.h"
 # include "list.h"
-# include "parser.h"
 # include "state.h"
+# include "xmalloc.h"
 
-#endif // FT_LS_H
+# include <errno.h>
+# include <libft.h>
+# include <string.h>
+
+# define EXIT_INVALID_OPTION	2
+
+int 	parse_arguments(int argc, char **argv, t_list **files, t_list **dirs);
+
+#endif // PARSER_H

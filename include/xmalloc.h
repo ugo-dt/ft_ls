@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.h                                            :+:      :+:    :+:   */
+/*   xmalloc.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/02 21:21:39 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/02/14 16:36:24 by ugdaniel         ###   ########.fr       */
+/*   Created: 2024/02/14 16:25:20 by ugdaniel          #+#    #+#             */
+/*   Updated: 2024/02/14 16:25:33 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LS_H
-# define FT_LS_H
+#ifndef XMALLOC_H
+# define XMALLOC_H
 
-# include "entry.h"
-# include "file.h"
-# include "list.h"
-# include "parser.h"
-# include "state.h"
+# include <stdlib.h>
 
-#endif // FT_LS_H
+void	*xmalloc(size_t size);
+
+#endif // XMALLOC_H

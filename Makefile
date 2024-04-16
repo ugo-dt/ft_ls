@@ -6,7 +6,7 @@
 #    By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/03 10:37:21 by ugdaniel          #+#    #+#              #
-#    Updated: 2024/02/05 12:21:56 by ugdaniel         ###   ########.fr        #
+#    Updated: 2024/02/15 12:10:05 by ugdaniel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,14 @@ NAME = ft_ls
 CC = clang
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS  = srcs/main.c
+SRCS  = srcs/main.c \
+		srcs/directory.c \
+		srcs/entry.c \
+		srcs/file.c \
+		srcs/list.c \
+		srcs/parser.c \
+		srcs/time.c \
+		srcs/xmalloc.c
 OBJS = $(SRCS:.c=.o)
 
 LIBFT_DIR = libft
@@ -48,6 +55,7 @@ $(NAME): $(OBJS)
 $(LIBFT):
 	@echo "$(__default)Compiling Libft"
 	$(SILENT)make --no-print-directory -C $(LIBFT_DIR)
+	$(SILENT)make --no-print-directory -C $(LIBFT_DIR) clean
 
 clean_libft:
 	$(SILENT)make --no-print-directory verbose=$(verbose) fclean -C $(LIBFT_DIR)
