@@ -6,7 +6,7 @@
 #    By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/03 10:37:21 by ugdaniel          #+#    #+#              #
-#    Updated: 2024/02/15 12:10:05 by ugdaniel         ###   ########.fr        #
+#    Updated: 2024/04/18 20:00:35 by ugdaniel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ clean_libft:
 clean:
 	$(SILENT)rm -f $(OBJS)
 
-fclean: clean clean_libft
+fclean: clean
 	$(SILENT)rm -f $(NAME)
 
 re: fclean all
