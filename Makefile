@@ -6,7 +6,7 @@
 #    By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/03 10:37:21 by ugdaniel          #+#    #+#              #
-#    Updated: 2024/04/18 20:00:35 by ugdaniel         ###   ########.fr        #
+#    Updated: 2024/04/24 13:15:23 by ugdaniel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ endif
 
 all: $(LIBFT) $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(LIBFT) $(OBJS)
 	@echo "Linking $(NAME)$(__default)"
 	$(SILENT)$(CC) -o $@ $^ $(LIBS)
 	@echo "$(__green)Successfully built $(NAME)$(__default)"
