@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:20:03 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/03 12:29:12 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/03 19:06:54 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,24 @@
 
 int do_stat(const char *path, struct stat *buf)
 {
+	int			result;
+	struct stat	tmp;
+	
+	result = lstat(path, &tmp);
+	if (result != 0)
+		return (result);
+	
 	if (state.options & OPTION_LONG)
-		return (lstat(path, buf));
-	return (stat(path, buf));
+	{
+		ft_memcpy(buf, &tmp, sizeof(struct stat));
+		return (result);
+	}
+
+	if (stat(path, buf) == 0)
+		return 0;
+
+	ft_memcpy(buf, &tmp, sizeof(struct stat));
+	return (result);
 }
 
 void	print_file_type(mode_t mode)
