@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:24:23 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/02/16 13:11:12 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/02 14:05:33 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FILE_H
 
 # define _DEFAULT_SOURCE	1
-# define PROGRAM_NAME		"ls"
+# define PROGRAM_NAME		"ft_ls"
 
 # include "state.h"
 

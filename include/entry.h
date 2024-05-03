@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:15:46 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/02/16 20:41:27 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/03 13:24:39 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "file.h"
 # include "state.h"
-# include "xmalloc.h"
+# include "ft_xmalloc.h"
 
 # include <errno.h>
 # include <grp.h>
@@ -47,9 +47,10 @@ struct Entry
 	struct passwd	*pwd;
 };
 
-struct Entry *entry_create(char *name, char *full_path);
+struct Entry *entry_create(const char *name, const char *full_path);
 void          entry_print(struct Entry *entry);
-void          entry_destroy(struct Entry *entry);
+void          entry_destroy(void *self);
+
 int           compare_entries_by_name(const struct Entry *a, const struct Entry *b);
 int           compare_entries_by_time(const struct Entry *a, const struct Entry *b);
 int           compare_entries_by_size(const struct Entry *a, const struct Entry *b);

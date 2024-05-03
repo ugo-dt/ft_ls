@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:14:56 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/02/22 11:52:49 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:23:23 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void entry_print(struct Entry *entry)
 		print_other_permissions(entry->statbuf.st_mode);
 		ft_printf(" %*ld ", state.width.nlink, entry->statbuf.st_nlink);
 
-		if (!(state.options & OPTION_DONT_SHOW_OWNER))
+		if (!(state.options & OPTION_HIDE_OWNER))
 		{
 			if ((pwd = getpwuid(entry->statbuf.st_uid)) != NULL)
 				ft_printf("%-*s ", state.width.owner, pwd->pw_name);
@@ -56,7 +56,7 @@ void entry_print(struct Entry *entry)
 				ft_printf("%-*u ", state.width.owner, entry->statbuf.st_uid);
 		}
 
-		if (!(state.options & OPTION_DONT_SHOW_GROUP))
+		if (!(state.options & OPTION_HIDE_GROUP))
 		{
 			if ((grp = getgrgid(entry->statbuf.st_gid)) != NULL)
 				ft_printf("%-*s ", state.width.group, grp->gr_name);
@@ -101,20 +101,23 @@ void entry_print(struct Entry *entry)
 			_width = len_; \
 	} while (0)
 
-struct Entry *entry_create(char *name, char *full_path)
+struct Entry *entry_create(const char *name, const char *full_path)
 {
-	struct Entry *_new_entry = xmalloc(sizeof(*_new_entry));
-	_new_entry->name = name;
-	_new_entry->full_path = full_path;
+	struct Entry *_new_entry = ft_xcalloc(sizeof(struct Entry));
+
+	if (name)
+		_new_entry->name = ft_strdup(name);
 	if (full_path)
 	{
+		_new_entry->full_path = ft_strdup(full_path);
 		long len;
 		if (do_stat(full_path, &_new_entry->statbuf) != 0)
 		{
 			show_errno_error(_new_entry->name);
+			entry_destroy(_new_entry);
 			return (NULL);
 		}
-		_SET_WIDTH(state.width.file_blocks, _new_entry->statbuf.st_blocks);
+		_SET_WIDTH(state.width.file_blocks, _new_entry->statbuf.st_blocks / 2);
 		if (state.options & OPTION_LONG)
 		{
 			if ((_new_entry->pwd = getpwuid(_new_entry->statbuf.st_uid)) != NULL)
@@ -146,8 +149,10 @@ struct Entry *entry_create(char *name, char *full_path)
 	return (_new_entry);
 }
 
-void entry_destroy(struct Entry *entry)
+void entry_destroy(void *self)
 {
+	struct Entry *entry = (struct Entry *)self;
+
 	if (!entry)
 		return;
 	if (entry->name)

@@ -6,7 +6,7 @@
 #    By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/03 10:37:21 by ugdaniel          #+#    #+#              #
-#    Updated: 2024/04/24 13:15:23 by ugdaniel         ###   ########.fr        #
+#    Updated: 2024/05/03 11:11:44 by ugdaniel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS  = srcs/main.c \
 		srcs/list.c \
 		srcs/parser.c \
 		srcs/time.c \
-		srcs/xmalloc.c
+		srcs/ft_xmalloc.c
 OBJS = $(SRCS:.c=.o)
 
 LIBFT_DIR = libft

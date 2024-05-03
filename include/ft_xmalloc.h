@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   xmalloc.c                                          :+:      :+:    :+:   */
+/*   ft_xmalloc.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 13:12:27 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/02/13 13:14:01 by ugdaniel         ###   ########.fr       */
+/*   Created: 2024/05/02 18:55:45 by ugdaniel          #+#    #+#             */
+/*   Updated: 2024/05/02 18:55:46 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#ifndef FT_XMALLOC_H
+# define FT_XMALLOC_H
 
-void	*xmalloc(size_t size)
-{
-	void	*p = malloc(size);
-	if (!p)
-	{
-		ft_putendl_fd("out of memory", STDERR_FILENO);
-		exit(EXIT_FAILURE);
-	}
-	return (p);
-}
+# include <libft.h>
+# include <stdlib.h>
+
+void	*ft_xmalloc(size_t size);
+void	*ft_xcalloc(size_t size);
+
+#endif // FT_XMALLOC_H

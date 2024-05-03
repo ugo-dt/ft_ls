@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:31:58 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/02/16 17:04:22 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/03 13:30:36 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@
 
 void	add_element(t_list **list, struct Entry *content);
 void	reverse_list(t_list **list);
-void	list_contents(t_list *list, int *recursion);
+void	list_contents(t_list *list);
 
 #endif // LIST_H

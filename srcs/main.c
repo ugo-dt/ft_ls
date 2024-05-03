@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 21:32:13 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/02/16 13:44:28 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/03 13:29:56 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,14 @@ struct State state;
 
 int main(int argc, char **argv)
 {
-	t_list *files = NULL;
-	t_list *dirs = NULL;
-	int	add_newline = 0;
+	t_list *files, *dirs;
 
+	files = dirs = NULL;
 	ft_memset(&state, 0, sizeof(state));
 	parse_arguments(argc, argv, &files, &dirs);
-	list_contents(files, &add_newline);
-	list_contents(dirs, &add_newline);
-	ft_lstclear(&files, (LstIterFunction)entry_destroy);
-	ft_lstclear(&dirs, (LstIterFunction)entry_destroy);
+	list_contents(files);
+	list_contents(dirs);
+	ft_lstclear(&files, entry_destroy);
+	ft_lstclear(&dirs, entry_destroy);
 	return (state.exit_value);
 }

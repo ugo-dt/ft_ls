@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:27:46 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/02/16 13:45:50 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/03 13:30:20 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@
 # include <libft.h>
 # include <string.h>
 
-void 	print_dir(t_list *file, int *recursion);
+void 	print_dir(t_list *file);
 
 #endif // DIRECTORY_H
