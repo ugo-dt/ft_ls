@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:56:08 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/04 14:59:08 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/04 21:59:53 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,12 @@ void print_dir(t_list *file)
 		if (state.options & OPTION_RECURSIVE && ft_strcmp(current_entry->name, ".") != 0 && ft_strcmp(current_entry->name, "..") != 0 && S_ISDIR(current_entry->statbuf.st_mode))
 		{
 			CREATE_PATH(join, dirname, current_entry->name);
-			struct Entry *new_entry = entry_create(join, join);
-			if (new_entry)
+			struct stat tmp;
+			lstat(join, &tmp);
+			if (!S_ISLNK(tmp.st_mode))
 			{
-				struct stat tmp;
-				lstat(new_entry->full_path, &tmp);
-
-				// ft_printf("new symlink %d %s %s (cmp: %d)\n", S_ISLNK(tmp.st_mode), join, new_entry->full_path, ft_strcmp(join, new_entry->full_path));
-				if (!S_ISLNK(tmp.st_mode) || ft_strcmp(join, new_entry->full_path) != 0)
+				struct Entry *new_entry = entry_create(join, join);
+				if (new_entry)
 					add_element(&dirs, new_entry);
 			}
 		}

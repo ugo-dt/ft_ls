@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:15:46 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/03 13:24:39 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/04 21:55:39 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ struct Entry
 
 struct Entry *entry_create(const char *name, const char *full_path);
 void          entry_print(struct Entry *entry);
-void          entry_destroy(void *self);
+void          entry_destroy(void *entry);
 
 int           compare_entries_by_name(const struct Entry *a, const struct Entry *b);
 int           compare_entries_by_time(const struct Entry *a, const struct Entry *b);
