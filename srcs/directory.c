@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:56:08 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/04 21:59:53 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/04 23:30:33 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void print_dir(t_list *file)
 	if (state.show_dir_names)
 		ft_printf("%s:\n", (char *)dirname);
 	if (state.options & OPTION_LONG || state.options & OPTION_PRINT_SIZE)
-		ft_printf("total %ld\n", total_blocks / 2);
+		ft_printf("total %ld\n", total_blocks >> BLOCKS_SHIFT_BY);
 	
 	while (entries)
 	{

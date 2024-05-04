@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:14:56 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/04 14:51:49 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/04 23:33:00 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void entry_print(struct Entry *entry)
 	if (SHOULD_SKIP_HIDDEN(entry->name))
 		return;
 	if (state.options & OPTION_PRINT_SIZE)
-		ft_printf("%*ld ", state.width.file_blocks, entry->statbuf.st_blocks / 2);
+		ft_printf("%*ld ", state.width.file_blocks, entry->statbuf.st_blocks >> BLOCKS_SHIFT_BY);
 	if (state.options & OPTION_LONG)
 	{
 		struct passwd *pwd;
@@ -112,7 +112,7 @@ struct Entry *entry_create(const char *name, const char *full_path)
 			entry_destroy(_new_entry);
 			return (NULL);
 		}
-		_SET_WIDTH(state.width.file_blocks, _new_entry->statbuf.st_blocks / 2);
+		_SET_WIDTH(state.width.file_blocks, _new_entry->statbuf.st_blocks >> BLOCKS_SHIFT_BY);
 		if (state.options & OPTION_LONG)
 		{
 			if ((_new_entry->pwd = getpwuid(_new_entry->statbuf.st_uid)) != NULL)

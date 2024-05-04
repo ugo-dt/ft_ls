@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:15:46 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/04 21:55:39 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/04 23:31:03 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,12 @@
 # include <stdbool.h>
 # include <string.h>
 # include <sys/stat.h>
-# include <sys/sysmacros.h>
 # include <sys/types.h>
 # include <time.h>
+
+# ifdef __linux__
+# include <sys/sysmacros.h>
+# endif
 
 # define _SKIP_IMPLIED(_name) \
 	(state.options & OPTION_ALMOST_ALL && (!ft_strcmp(_name, ".") || !ft_strcmp(_name, "..")))
