@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:56:08 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/03 17:48:41 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/04 14:59:08 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static t_list *get_dir_entries(const char *path, long *total_blocks)
 	closedir(dir);
 	if (state.options & OPTION_REVERSE)
 		reverse_list(&list);
+	errno = 0;
 	return (list);
 }
 
@@ -67,11 +68,11 @@ void print_dir(t_list *file)
 	entries_start = entries = get_dir_entries(dirname, &total_blocks);
 	dirs = NULL;
 
-	if (!entries)
+	if (errno)
 		return ;
 	if (state.add_newline)
 		ft_putchar('\n');
-	if (state.show_dir_names && entries)
+	if (state.show_dir_names)
 		ft_printf("%s:\n", (char *)dirname);
 	if (state.options & OPTION_LONG || state.options & OPTION_PRINT_SIZE)
 		ft_printf("total %ld\n", total_blocks / 2);
@@ -88,11 +89,15 @@ void print_dir(t_list *file)
 		if (state.options & OPTION_RECURSIVE && ft_strcmp(current_entry->name, ".") != 0 && ft_strcmp(current_entry->name, "..") != 0 && S_ISDIR(current_entry->statbuf.st_mode))
 		{
 			CREATE_PATH(join, dirname, current_entry->name);
-			struct Entry *new_entry = entry_create(join, NULL);
+			struct Entry *new_entry = entry_create(join, join);
 			if (new_entry)
 			{
-				new_entry->statbuf = current_entry->statbuf;
-				add_element(&dirs, new_entry);
+				struct stat tmp;
+				lstat(new_entry->full_path, &tmp);
+
+				// ft_printf("new symlink %d %s %s (cmp: %d)\n", S_ISLNK(tmp.st_mode), join, new_entry->full_path, ft_strcmp(join, new_entry->full_path));
+				if (!S_ISLNK(tmp.st_mode) || ft_strcmp(join, new_entry->full_path) != 0)
+					add_element(&dirs, new_entry);
 			}
 		}
 		entry_print(current_entry);

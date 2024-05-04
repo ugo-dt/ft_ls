@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:14:56 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/03 18:19:31 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/04 14:51:49 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ void entry_print(struct Entry *entry)
 		return;
 	if (SHOULD_SKIP_HIDDEN(entry->name))
 		return;
+	if (state.options & OPTION_PRINT_SIZE)
+		ft_printf("%*ld ", state.width.file_blocks, entry->statbuf.st_blocks / 2);
 	if (state.options & OPTION_LONG)
 	{
-		if (state.options & OPTION_PRINT_SIZE)
-			ft_printf("%*ld ", state.width.file_blocks, entry->statbuf.st_blocks / 2);
 		struct passwd *pwd;
 		struct group *grp;
 
@@ -72,11 +72,6 @@ void entry_print(struct Entry *entry)
 
 		print_date(&entry->statbuf);
 		ft_putchar(' ');
-	}
-	else
-	{
-		if (state.options & OPTION_PRINT_SIZE)
-			ft_printf("%*ld ", state.width.file_blocks, entry->statbuf.st_blocks / 2);
 	}
 	ft_putstr(entry->name);
 	if (state.options & OPTION_LONG && is_entry_symbolic_link(entry))

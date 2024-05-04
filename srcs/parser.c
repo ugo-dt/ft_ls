@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:20:44 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/03 18:19:36 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/04 14:50:35 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,10 +209,8 @@ int	parse_arguments(int argc, char **argv, t_list **files, t_list **dirs)
 	// default path
 	if (dircount == 0 && filecount == 0 && file_args == 0)
 	{
-		struct Entry *_new_entry = entry_create(".", NULL);
-		if (do_stat(".", &_new_entry->statbuf) != 0)
-			show_errno_error(_new_entry->name);
-		else
+		struct Entry *_new_entry = entry_create(".", ".");
+		if (_new_entry)
 			add_element(dirs, _new_entry);
 	}
 
