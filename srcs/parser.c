@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:20:44 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/04 14:50:35 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/05 11:21:02 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ static inline int match_word(char *word, char *option)
 	do                                                                                       \
 	{                                                                                        \
 		char *_eq = ft_strchr(argv[i], '=');                                                 \
-		if ((_code == OPTION_FORMAT && (_eq && ft_strncmp(argv[i], "--format", (_eq - argv[i])) == 0) || ft_strncmp(argv[i], _long, len) == 0) \
-			|| (_code == OPTION_SORT && (_eq && ft_strncmp(argv[i], "--sort", (_eq - argv[i])) == 0) || ft_strncmp(argv[i], _long, len) == 0)\
+		if ((_code == OPTION_FORMAT && ((_eq && ft_strncmp(argv[i], "--format", (_eq - argv[i])) == 0) || ft_strncmp(argv[i], _long, len) == 0)) \
+			|| (_code == OPTION_SORT && ((_eq && ft_strncmp(argv[i], "--sort", (_eq - argv[i])) == 0) || ft_strncmp(argv[i], _long, len) == 0)) \
 			) \
 		{                                                                                    \
 			char *_word;                                                                     \
