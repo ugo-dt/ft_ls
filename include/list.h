@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:31:58 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/03 13:30:36 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/05 11:13:42 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "entry.h"
 # include "parser.h"
 # include "directory.h"
-
 # include <libft.h>
 
 void	add_element(t_list **list, struct Entry *content);

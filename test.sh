@@ -16,6 +16,49 @@ run_bonus()
 	diff <(./ft_ls -S) <(ls -S) || (echo "BONUS KO" && exit 1)
 	diff <(./ft_ls -U) <(ls -U) || (echo "BONUS KO" && exit 1)
 
+	diff <(./ft_ls --all) <(ls --all) || (echo "BONUS KO" && exit 1)
+	diff <(./ft_ls --almost-all) <(ls --almost-all) || (echo "BONUS KO" && exit 1)
+	diff <(./ft_ls --reverse) <(ls --reverse) || (echo "BONUS KO" && exit 1)
+	diff <(./ft_ls --recursive) <(ls --recursive) || (echo "BONUS KO" && exit 1)
+	diff <(./ft_ls --size) <(ls --size) || (echo "BONUS KO" && exit 1)
+	diff <(./ft_ls --sort=none) <(ls --sort=none) || (echo "BONUS KO" && exit 1)
+	diff <(./ft_ls --sort=size) <(ls --sort=size) || (echo "BONUS KO" && exit 1)
+	diff <(./ft_ls --sort=time) <(ls --sort=time) || (echo "BONUS KO" && exit 1)
+
+	diff <(./ft_ls --format=long) <(ls --format=long) || (echo "KO" && exit 1)
+	diff <(./ft_ls --format=verbose) <(ls --format=verbose) || (echo "KO" && exit 1)
+	diff <(./ft_ls --format long) <(ls --format long) || (echo "KO" && exit 1)
+	diff <(./ft_ls --format verbose) <(ls --format verbose) || (echo "KO" && exit 1)
+	diff <(./ft_ls --forma=long) <(ls --forma=long) || (echo "KO" && exit 1)
+	diff <(./ft_ls --forma=verbose) <(ls --forma=verbose) || (echo "KO" && exit 1)
+	diff <(./ft_ls --forma long) <(ls --forma long) || (echo "KO" && exit 1)
+	diff <(./ft_ls --forma verbose) <(ls --forma verbose) || (echo "KO" && exit 1)
+	diff <(./ft_ls --fo=long) <(ls --fo=long) || (echo "KO" && exit 1)
+	diff <(./ft_ls --fo=verbose) <(ls --fo=verbose) || (echo "KO" && exit 1)
+	diff <(./ft_ls --fo long) <(ls --fo long) || (echo "KO" && exit 1)
+	diff <(./ft_ls --fo verbose) <(ls --fo verbose) || (echo "KO" && exit 1)
+	diff <(./ft_ls --fo=l) <(ls --fo=l) || (echo "KO" && exit 1)
+	diff <(./ft_ls --fo=verb) <(ls --fo=verb) || (echo "KO" && exit 1)
+	diff <(./ft_ls --fo l) <(ls --fo l) || (echo "KO" && exit 1)
+	diff <(./ft_ls --fo verb) <(ls --fo verb) || (echo "KO" && exit 1)
+
+	diff <(./ft_ls --format=long /bin) <(ls --format=long /bin) || (echo "KO" && exit 1)
+	diff <(./ft_ls --format=verbose /bin) <(ls --format=verbose /bin) || (echo "KO" && exit 1)
+	diff <(./ft_ls --format long /bin) <(ls --format long /bin) || (echo "KO" && exit 1)
+	diff <(./ft_ls --format verbose /bin) <(ls --format verbose /bin) || (echo "KO" && exit 1)
+	diff <(./ft_ls --forma=long /bin) <(ls --forma=long /bin) || (echo "KO" && exit 1)
+	diff <(./ft_ls --forma=verbose /bin) <(ls --forma=verbose /bin) || (echo "KO" && exit 1)
+	diff <(./ft_ls --forma long /bin) <(ls --forma long /bin) || (echo "KO" && exit 1)
+	diff <(./ft_ls --forma verbose /bin) <(ls --forma verbose /bin) || (echo "KO" && exit 1)
+	diff <(./ft_ls --fo=long /bin) <(ls --fo=long /bin) || (echo "KO" && exit 1)
+	diff <(./ft_ls --fo=verbose /bin) <(ls --fo=verbose /bin) || (echo "KO" && exit 1)
+	diff <(./ft_ls --fo long /bin) <(ls --fo long /bin) || (echo "KO" && exit 1)
+	diff <(./ft_ls --fo verbose /bin) <(ls --fo verbose /bin) || (echo "KO" && exit 1)
+	diff <(./ft_ls --fo=l /bin) <(ls --fo=l /bin) || (echo "KO" && exit 1)
+	diff <(./ft_ls --fo=verb /bin) <(ls --fo=verb /bin) || (echo "KO" && exit 1)
+	diff <(./ft_ls --fo l /bin) <(ls --fo l /bin) || (echo "KO" && exit 1)
+	diff <(./ft_ls --fo verb /bin) <(ls --fo verb /bin) || (echo "KO" && exit 1)
+
 	echo "BONUS OK"
 }
 
@@ -98,40 +141,6 @@ run_tests()
 	diff <(./ft_ls -ltar *) <(ls -ltar *) || (echo "KO" && exit 1)
 	diff <(./ft_ls -ltaRr *) <(ls -ltarR *) || (echo "KO" && exit 1)
 
-	diff <(./ft_ls --format=long) <(ls --format=long) || (echo "KO" && exit 1)
-	diff <(./ft_ls --format=verbose) <(ls --format=verbose) || (echo "KO" && exit 1)
-	diff <(./ft_ls --format long) <(ls --format long) || (echo "KO" && exit 1)
-	diff <(./ft_ls --format verbose) <(ls --format verbose) || (echo "KO" && exit 1)
-	diff <(./ft_ls --forma=long) <(ls --forma=long) || (echo "KO" && exit 1)
-	diff <(./ft_ls --forma=verbose) <(ls --forma=verbose) || (echo "KO" && exit 1)
-	diff <(./ft_ls --forma long) <(ls --forma long) || (echo "KO" && exit 1)
-	diff <(./ft_ls --forma verbose) <(ls --forma verbose) || (echo "KO" && exit 1)
-	diff <(./ft_ls --fo=long) <(ls --fo=long) || (echo "KO" && exit 1)
-	diff <(./ft_ls --fo=verbose) <(ls --fo=verbose) || (echo "KO" && exit 1)
-	diff <(./ft_ls --fo long) <(ls --fo long) || (echo "KO" && exit 1)
-	diff <(./ft_ls --fo verbose) <(ls --fo verbose) || (echo "KO" && exit 1)
-	diff <(./ft_ls --fo=l) <(ls --fo=l) || (echo "KO" && exit 1)
-	diff <(./ft_ls --fo=verb) <(ls --fo=verb) || (echo "KO" && exit 1)
-	diff <(./ft_ls --fo l) <(ls --fo l) || (echo "KO" && exit 1)
-	diff <(./ft_ls --fo verb) <(ls --fo verb) || (echo "KO" && exit 1)
-
-	diff <(./ft_ls --format=long /bin) <(ls --format=long /bin) || (echo "KO" && exit 1)
-	diff <(./ft_ls --format=verbose /bin) <(ls --format=verbose /bin) || (echo "KO" && exit 1)
-	diff <(./ft_ls --format long /bin) <(ls --format long /bin) || (echo "KO" && exit 1)
-	diff <(./ft_ls --format verbose /bin) <(ls --format verbose /bin) || (echo "KO" && exit 1)
-	diff <(./ft_ls --forma=long /bin) <(ls --forma=long /bin) || (echo "KO" && exit 1)
-	diff <(./ft_ls --forma=verbose /bin) <(ls --forma=verbose /bin) || (echo "KO" && exit 1)
-	diff <(./ft_ls --forma long /bin) <(ls --forma long /bin) || (echo "KO" && exit 1)
-	diff <(./ft_ls --forma verbose /bin) <(ls --forma verbose /bin) || (echo "KO" && exit 1)
-	diff <(./ft_ls --fo=long /bin) <(ls --fo=long /bin) || (echo "KO" && exit 1)
-	diff <(./ft_ls --fo=verbose /bin) <(ls --fo=verbose /bin) || (echo "KO" && exit 1)
-	diff <(./ft_ls --fo long /bin) <(ls --fo long /bin) || (echo "KO" && exit 1)
-	diff <(./ft_ls --fo verbose /bin) <(ls --fo verbose /bin) || (echo "KO" && exit 1)
-	diff <(./ft_ls --fo=l /bin) <(ls --fo=l /bin) || (echo "KO" && exit 1)
-	diff <(./ft_ls --fo=verb /bin) <(ls --fo=verb /bin) || (echo "KO" && exit 1)
-	diff <(./ft_ls --fo l /bin) <(ls --fo l /bin) || (echo "KO" && exit 1)
-	diff <(./ft_ls --fo verb /bin) <(ls --fo verb /bin) || (echo "KO" && exit 1)
-
 	# These take longer to complete
 	# diff <(./ft_ls -artRl /usr/lib) <(ls -artRl /usr/lib) || (echo "KO" && exit 1)
 	# diff <(./ft_ls -artRl /usr) <(ls -artRl /usr) || (echo "KO" && exit 1)
@@ -163,12 +172,11 @@ if [ "$verbose" = true ]; then
 		run_bonus
 	fi
 else
-	run_tests
+	run_tests 2> /dev/null
 	if [ "$bonus" = true ]; then
-		run_bonus
+		run_bonus  2> /dev/null
 	fi
 fi
 
 
 rm -f __ft_ls_test_fifo__
-

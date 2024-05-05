@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:21:45 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/03 14:17:51 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/05 11:23:00 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 	_ITER_F(DIRECTORY_ORDER,	0x4,	'f', "\0",				0x0,				OPTION_ALL,			OPTION_SORT_NONE,	__VA_ARGS__) \
 	_ITER_F(FORMAT,				0x8,	0,   "--format",		0x0,				0x0,				0x0,				__VA_ARGS__) \
 	_ITER_F(HIDE_OWNER,			0x10,	'g', "\0",				0x0,				OPTION_LONG,		0x0,				__VA_ARGS__) \
-	_ITER_F(LONG,				0x20,	'l', "--long",			0x0,				0x0,				0x0,				__VA_ARGS__) \
+	_ITER_F(LONG,				0x20,	'l', "\0",				0x0,				0x0,				0x0,				__VA_ARGS__) \
 	_ITER_F(HIDE_GROUP,			0x40,	'o', "\0",				0x0,				OPTION_LONG,		0x0,				__VA_ARGS__) \
 	_ITER_F(REVERSE,			0x80,	'r', "--reverse",		0x0,				0x0,				0x0,				__VA_ARGS__) \
 	_ITER_F(RECURSIVE,			0x100,	'R', "--recursive",		0x0,				0x0,				0x0,				__VA_ARGS__) \
@@ -34,16 +34,16 @@
 	_ITER_F(SORT_BY_TIME,		0x1000,	't', "\0",				0x0,				0x0,				0x0,				__VA_ARGS__) \
 	_ITER_F(SORT_NONE,			0x2000,	'U', "\0",				0x0,				0x0,				0x0,				__VA_ARGS__)
 
-#define FORMATS_ITER(_ITER_F, ...)           \
+# define FORMATS_ITER(_ITER_F, ...)          \
 	_ITER_F(LONG,    OPTION_LONG, "long")    \
 	_ITER_F(VERBOSE, OPTION_LONG, "verbose")
 
-#define SORTS_ITER(_ITER_F, ...)            \
-	_ITER_F(NONE, OPTION_SORT_NONE, "none") \
+# define SORTS_ITER(_ITER_F, ...)              \
+	_ITER_F(NONE, OPTION_SORT_NONE, "none")    \
 	_ITER_F(SIZE, OPTION_SORT_BY_SIZE, "size") \
 	_ITER_F(TIME, OPTION_SORT_BY_TIME, "time")
 
-#define DECL_OPTION_ENUM_MEMBER(_name, _code, ...)	OPTION_##_name = _code,
+# define DECL_OPTION_ENUM_MEMBER(_name, _code, ...)	OPTION_##_name = _code,
 
 enum Option
 {

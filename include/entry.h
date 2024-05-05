@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:15:46 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/04 23:31:03 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/05 11:13:46 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "file.h"
 # include "state.h"
 # include "ft_xmalloc.h"
-
 # include <errno.h>
 # include <grp.h>
 # include <libft.h>
@@ -28,7 +27,7 @@
 # include <time.h>
 
 # ifdef __linux__
-# include <sys/sysmacros.h>
+#  include <sys/sysmacros.h>
 # endif
 
 # define _SKIP_IMPLIED(_name) \

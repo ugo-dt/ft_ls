@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:22:37 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/03 12:00:08 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/05 11:13:51 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "list.h"
 # include "state.h"
 # include "ft_xmalloc.h"
-
 # include <errno.h>
 # include <libft.h>
 # include <string.h>
