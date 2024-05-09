@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:20:03 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/04 14:53:57 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/09 13:32:37 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ void print_date(struct stat *statbuf)
 	   avoid floating point hassles.
 	*/
 	six_months_ago.tv_sec = state.current_time.tv_sec - 31556952 / 2;
-	// six_months_ago.tv_nsec = state.current_time.tv_nsec;
+	six_months_ago.tv_nsec = when_timespec.tv_nsec;
 
 	recent = (timespec_cmp(six_months_ago, when_timespec) <= 0 && timespec_cmp(when_timespec, state.current_time) <= 0);
 	char *time_str = ctime(&statbuf->st_mtime);
