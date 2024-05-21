@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:14:56 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/04 23:33:00 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/21 20:08:33 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void entry_print(struct Entry *entry)
 	if (SHOULD_SKIP_HIDDEN(entry->name))
 		return;
 	if (state.options & OPTION_PRINT_SIZE)
-		ft_printf("%*ld ", state.width.file_blocks, entry->statbuf.st_blocks >> BLOCKS_SHIFT_BY);
+		ft_printf("%*ld ", state.width.file_blocks, (long)entry->statbuf.st_blocks >> BLOCKS_SHIFT_BY);
 	if (state.options & OPTION_LONG)
 	{
 		struct passwd *pwd;
@@ -46,7 +46,7 @@ void entry_print(struct Entry *entry)
 		print_owner_permissions(entry->statbuf.st_mode);
 		print_group_permissions(entry->statbuf.st_mode);
 		print_other_permissions(entry->statbuf.st_mode);
-		ft_printf(" %*ld ", state.width.nlink, entry->statbuf.st_nlink);
+		ft_printf(" %*ld ", state.width.nlink, (long)entry->statbuf.st_nlink);
 
 		if (!(state.options & OPTION_HIDE_OWNER))
 		{
@@ -68,7 +68,7 @@ void entry_print(struct Entry *entry)
             ft_printf("%*u, %*u ", state.width.major_device_number, major(entry->statbuf.st_rdev),
 			                         state.width.minor_device_number, minor(entry->statbuf.st_rdev));
 		else
-			ft_printf("%*lld ", state.width.file_size, (long long)entry->statbuf.st_size);
+			ft_printf("%*ld ", state.width.file_size, (long)entry->statbuf.st_size);
 
 		print_date(&entry->statbuf);
 		ft_putchar(' ');
