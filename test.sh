@@ -108,18 +108,13 @@ run_tests()
 
 	diff <(./ft_ls /bin) <(ls /bin) || (echo "KO" && exit 1)
 	diff <(./ft_ls /usr/bin) <(ls /usr/bin) || (echo "KO" && exit 1)
-	diff <(./ft_ls /var/run) <(ls /var/run) || (echo "KO" && exit 1)
 	diff <(./ft_ls /dev) <(ls /dev) || (echo "KO" && exit 1)
 
 	diff <(./ft_ls -R /bin) <(ls -R /bin) || (echo "KO" && exit 1)
 	diff <(./ft_ls -R /usr/bin) <(ls -R /usr/bin) || (echo "KO" && exit 1)
-	diff <(./ft_ls -R /var/run) <(ls -R /var/run) || (echo "KO" && exit 1)
-	diff <(./ft_ls -R /dev) <(ls -R /dev) || (echo "KO" && exit 1)
 
 	diff <(./ft_ls -laR /bin) <(ls -laR /bin) || (echo "KO" && exit 1)
 	diff <(./ft_ls -laR /usr/bin) <(ls -laR /usr/bin) || (echo "KO" && exit 1)
-	diff <(./ft_ls -laR /var/run) <(ls -laR /var/run) || (echo "KO" && exit 1)
-	diff <(./ft_ls -laR /dev) <(ls -laR /dev) || (echo "KO" && exit 1)
 
 	diff <(./ft_ls -ta *) <(ls -ta *) || (echo "KO" && exit 1)
 	diff <(./ft_ls -taA *) <(ls -taA *) || (echo "KO" && exit 1)

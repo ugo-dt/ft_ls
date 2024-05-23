@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:15:46 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/05 11:13:46 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:18:33 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,13 @@
 # define SHOULD_SKIP_HIDDEN(_name) \
 	(_name[0] == '.' && !(state.options & (OPTION_ALL | OPTION_ALMOST_ALL)) || _SKIP_IMPLIED(_name))
 
-# ifndef SYMLINK_MAX
-#  define SYMLINK_MAX		1024
-# endif
-
 struct Entry
 {
-	char			*name;
-	char			*full_path;
-	struct stat		statbuf;
-	struct group	*grp;
-	struct passwd	*pwd;
+	char          *name;
+	char          *full_path;
+	struct stat   statbuf;
+	struct group  *grp;
+	struct passwd *pwd;
 };
 
 struct Entry *entry_create(const char *name, const char *full_path);

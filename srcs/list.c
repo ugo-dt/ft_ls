@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:33:44 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/03 13:30:11 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:16:49 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ static void _add_element_sorted(t_list **list, struct Entry *content, int (*comp
 
 void	add_element(t_list **list, struct Entry *content)
 {
-	if (state.sort_type == sort_none)
-		ft_lstadd_back(list, ft_lstnew(content));
+	if (state.sort_type == sort_by_name)
+		_add_element_sorted(list, content, compare_entries_by_name);
 	else if (state.sort_type == sort_by_time)
 		_add_element_sorted(list, content, compare_entries_by_time);
 	else if (state.sort_type == sort_by_size)
 		_add_element_sorted(list, content, compare_entries_by_size);
-	else if (state.sort_type == sort_by_name)
-		_add_element_sorted(list, content, compare_entries_by_name);
+	else // if (state.sort_type == sort_none)
+		ft_lstadd_back(list, ft_lstnew(content));
 }
 
 void reverse_list(t_list **list)

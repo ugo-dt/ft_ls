@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:14:56 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/21 20:08:33 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:17:27 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,32 +112,35 @@ struct Entry *entry_create(const char *name, const char *full_path)
 			entry_destroy(_new_entry);
 			return (NULL);
 		}
-		_SET_WIDTH(state.width.file_blocks, _new_entry->statbuf.st_blocks >> BLOCKS_SHIFT_BY);
-		if (state.options & OPTION_LONG)
+		else
 		{
-			if ((_new_entry->pwd = getpwuid(_new_entry->statbuf.st_uid)) != NULL)
-				len = ft_strlen(_new_entry->pwd->pw_name);
-			else
-				GET_NUMBER_LENGTH(&len, _new_entry->statbuf.st_uid, 10);
-			if (state.width.owner < len)
-				state.width.owner = len;
-
-			if ((_new_entry->grp = getgrgid(_new_entry->statbuf.st_gid)) != NULL)
-				len = ft_strlen(_new_entry->grp->gr_name);
-			else
-				GET_NUMBER_LENGTH(&len, _new_entry->statbuf.st_gid, 10);
-			if (state.width.group < len)
-				state.width.group = len;
-			
-			_SET_WIDTH(state.width.nlink, _new_entry->statbuf.st_nlink);
-			_SET_WIDTH(state.width.file_size, _new_entry->statbuf.st_size);
-
-			if (S_ISCHR(_new_entry->statbuf.st_mode) || S_ISBLK(_new_entry->statbuf.st_mode))
+			_SET_WIDTH(state.width.file_blocks, _new_entry->statbuf.st_blocks >> BLOCKS_SHIFT_BY);
+			if (state.options & OPTION_LONG)
 			{
-				_SET_WIDTH(state.width.major_device_number, major(_new_entry->statbuf.st_rdev));
-				_SET_WIDTH(state.width.minor_device_number, minor(_new_entry->statbuf.st_rdev));
-				if (state.width.file_size < state.width.major_device_number + state.width.minor_device_number + 2)
-					state.width.file_size = state.width.major_device_number + state.width.minor_device_number + 2;
+				if ((_new_entry->pwd = getpwuid(_new_entry->statbuf.st_uid)) != NULL)
+					len = ft_strlen(_new_entry->pwd->pw_name);
+				else
+					GET_NUMBER_LENGTH(&len, _new_entry->statbuf.st_uid, 10);
+				if (state.width.owner < len)
+					state.width.owner = len;
+
+				if ((_new_entry->grp = getgrgid(_new_entry->statbuf.st_gid)) != NULL)
+					len = ft_strlen(_new_entry->grp->gr_name);
+				else
+					GET_NUMBER_LENGTH(&len, _new_entry->statbuf.st_gid, 10);
+				if (state.width.group < len)
+					state.width.group = len;
+				
+				_SET_WIDTH(state.width.nlink, _new_entry->statbuf.st_nlink);
+				_SET_WIDTH(state.width.file_size, _new_entry->statbuf.st_size);
+
+				if (S_ISCHR(_new_entry->statbuf.st_mode) || S_ISBLK(_new_entry->statbuf.st_mode))
+				{
+					_SET_WIDTH(state.width.major_device_number, major(_new_entry->statbuf.st_rdev));
+					_SET_WIDTH(state.width.minor_device_number, minor(_new_entry->statbuf.st_rdev));
+					if (state.width.file_size < state.width.major_device_number + state.width.minor_device_number + 2)
+						state.width.file_size = state.width.major_device_number + state.width.minor_device_number + 2;
+				}
 			}
 		}
 	}

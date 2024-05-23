@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:20:03 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/09 13:32:37 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:12:11 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	print_file_type(mode_t mode)
 
 void print_owner_permissions(mode_t mode)
 {
-	ft_putchar((mode & S_IRUSR) ? 'r' : '-');
-	ft_putchar((mode & S_IWUSR) ? 'w' : '-');
+	ft_putchar((mode & S_IRUSR) ? 'r' : mode ? '-' : '?');
+	ft_putchar((mode & S_IWUSR) ? 'w' : mode ? '-' : '?');
 	if (mode & S_IXUSR)
 	{
 		if (mode & S_ISUID)
@@ -80,6 +80,8 @@ void print_owner_permissions(mode_t mode)
 	{
 		if (mode & S_ISUID)
 			ft_putchar('S');
+		else if (!mode)
+			ft_putchar('?');
 		else
 			ft_putchar('-');
 	}
@@ -87,8 +89,8 @@ void print_owner_permissions(mode_t mode)
 
 void print_group_permissions(mode_t mode)
 {
-	ft_putchar((mode & S_IRGRP) ? 'r' : '-');
-	ft_putchar((mode & S_IWGRP) ? 'w' : '-');
+	ft_putchar((mode & S_IRGRP) ? 'r' : mode ? '-' : '?');
+	ft_putchar((mode & S_IWGRP) ? 'w' : mode ? '-' : '?');
 	if (mode & S_IXGRP)
 	{
 		if (mode & S_ISGID)
@@ -100,6 +102,8 @@ void print_group_permissions(mode_t mode)
 	{
 		if (mode & S_ISGID)
 			ft_putchar('S');
+		else if (!mode)
+			ft_putchar('?');
 		else
 			ft_putchar('-');
 	}
@@ -107,8 +111,8 @@ void print_group_permissions(mode_t mode)
 
 void print_other_permissions(mode_t mode)
 {
-	ft_putchar((mode & S_IROTH) ? 'r' : '-');
-	ft_putchar((mode & S_IWOTH) ? 'w' : '-');
+	ft_putchar((mode & S_IROTH) ? 'r' : mode ? '-' : '?');
+	ft_putchar((mode & S_IWOTH) ? 'w' : mode ? '-' : '?');
 	if (mode & S_IXOTH)
 	{
 		if (mode & S_ISVTX)
@@ -120,6 +124,8 @@ void print_other_permissions(mode_t mode)
 	{
 		if (mode & S_ISVTX)
 			ft_putchar('T');
+		else if (!mode)
+			ft_putchar('?');
 		else
 			ft_putchar('-');
 	}
