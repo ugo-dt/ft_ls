@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:20:44 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/05 11:21:02 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/24 14:22:51 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ static inline int match_word(char *word, char *option)
 	}
 	if (ft_strcmp(option, "--format") == 0)
 	{
-		FORMATS_ITER(MATCH_FORMAT);
+		FORMATS_ITER(MATCH_FORMAT,);
 		ft_dprintf(STDERR_FILENO, PROGRAM_NAME ": invalid argument '%s' for '%s'\nValid arguments are:\n  - 'verbose', 'long'\n", word, option);
 	}
 	else if (ft_strcmp(option, "--sort") == 0)
 	{
-		SORTS_ITER(MATCH_FORMAT);
+		SORTS_ITER(MATCH_FORMAT,);
 		ft_dprintf(STDERR_FILENO, PROGRAM_NAME ": invalid argument '%s' for '%s'\nValid arguments are:\n  - 'none'\n  - 'time'\n  - 'size'\n", word, option);
 	}
 	return (-1);
@@ -126,7 +126,7 @@ static int	parse_options(int argc, char **argv)
 		{
 			if (len > 2)
 			{
-				OPTIONS_ITER(MATCH_LONG_OPTION);
+				OPTIONS_ITER(MATCH_LONG_OPTION,);
 				if (!count)
 				{
 					ft_dprintf(STDERR_FILENO, PROGRAM_NAME ": unrecognized option '%s'\n", argv[i]);
@@ -135,7 +135,7 @@ static int	parse_options(int argc, char **argv)
 				if (count >= 2)
 				{
 					ft_dprintf(STDERR_FILENO, PROGRAM_NAME ": option '%s' is ambiguous; possibilities:", argv[i]);
-					OPTIONS_ITER(PRINT_AMBIGUOUS);
+					OPTIONS_ITER(PRINT_AMBIGUOUS,);
 					ft_dprintf(STDERR_FILENO, "\n");
 					return (-1);
 				}
@@ -148,7 +148,7 @@ static int	parse_options(int argc, char **argv)
 			{
 				switch (argv[i][j])
 				{
-				OPTIONS_ITER(MATCH_SHORT_OPTION);
+				OPTIONS_ITER(MATCH_SHORT_OPTION,);
 				default:
 					ft_dprintf(STDERR_FILENO, PROGRAM_NAME ": invalid option -- '%c'\n", argv[i][j]);
 					return (-1);
@@ -178,8 +178,8 @@ int	parse_arguments(int argc, char **argv, t_list **files, t_list **dirs)
 			continue;
 		}
 		else if (
-					((_eq && ft_strncmp(argv[i], "--format", (_eq - argv[i])) == 0) || ft_strncmp(argv[i], "--format", ft_strlen(argv[i])) == 0)
-					|| ((_eq && ft_strncmp(argv[i], "--sort", (_eq - argv[i])) == 0) || ft_strncmp(argv[i], "--sort", ft_strlen(argv[i])) == 0)
+					((_eq && ft_strncmp(argv[i], "--format", (_eq - argv[i])) == 0) || ft_strncmp(argv[i], "--format", ft_strlen(argv[i])) == 0) ||
+					((_eq && ft_strncmp(argv[i], "--sort",   (_eq - argv[i])) == 0) || ft_strncmp(argv[i], "--sort",   ft_strlen(argv[i])) == 0)
 				)
 		{
 			if (!_eq)

@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:56:08 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/23 16:02:54 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/24 14:17:40 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void print_dir(t_list *file)
 			entries = entries->next;
 			continue;
 		}
-		if (state.options & OPTION_RECURSIVE && ft_strcmp(current_entry->name, ".") != 0 && ft_strcmp(current_entry->name, "..") != 0 && S_ISDIR(current_entry->statbuf.st_mode))
+		if (state.options & OPTION_RECURSIVE && S_ISDIR(current_entry->statbuf.st_mode) && ft_strcmp(current_entry->name, ".") != 0 && ft_strcmp(current_entry->name, "..") != 0)
 		{
 			CREATE_PATH(join, dirname, current_entry->name);
 			struct stat tmp;

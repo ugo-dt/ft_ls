@@ -142,6 +142,7 @@ run_tests()
 
 	set +x
 	echo "OK"
+	rm -f __ft_ls_test_fifo__
 }
 
 for var in "$@"

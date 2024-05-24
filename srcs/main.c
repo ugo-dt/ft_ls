@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 21:32:13 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/03 13:29:56 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/24 14:13:38 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int main(int argc, char **argv)
 {
 	t_list *files, *dirs;
 
-	files = dirs = NULL;
+	files = NULL;
+	dirs = NULL;
 	ft_memset(&state, 0, sizeof(state));
 	parse_arguments(argc, argv, &files, &dirs);
 	list_contents(files);

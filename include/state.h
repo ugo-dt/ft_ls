@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:21:45 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/05 11:23:00 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/05/24 14:21:22 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 
 enum Option
 {
-	OPTIONS_ITER(DECL_OPTION_ENUM_MEMBER)
+	OPTIONS_ITER(DECL_OPTION_ENUM_MEMBER,)
 	LAST_OPTION = OPTION_SORT_NONE,
 };
 
