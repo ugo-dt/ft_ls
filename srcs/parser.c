@@ -12,6 +12,12 @@
 
 #include "parser.h"
 
+# ifdef __GNUC__
+#  if __has_warning("-Wgnu-zero-variadic-macro-arguments")
+#   pragma GCC diagnostic ignored	"-Wgnu-zero-variadic-macro-arguments"
+#  endif
+# endif // __GNUC__
+
 # define IS_SORT(_option_code) (_option_code == OPTION_SORT_BY_SIZE || _option_code == OPTION_SORT_BY_TIME || _option_code == OPTION_SORT_NONE)
 
 #define MATCH_FORMAT(_name, _code, _word)                  \
@@ -37,12 +43,12 @@ static inline int match_word(char *word, char *option)
 	}
 	if (ft_strcmp(option, "--format") == 0)
 	{
-		FORMATS_ITER(MATCH_FORMAT,);
+		FORMATS_ITER(MATCH_FORMAT);
 		ft_dprintf(STDERR_FILENO, PROGRAM_NAME ": invalid argument '%s' for '%s'\nValid arguments are:\n  - 'verbose', 'long'\n", word, option);
 	}
 	else if (ft_strcmp(option, "--sort") == 0)
 	{
-		SORTS_ITER(MATCH_FORMAT,);
+		SORTS_ITER(MATCH_FORMAT);
 		ft_dprintf(STDERR_FILENO, PROGRAM_NAME ": invalid argument '%s' for '%s'\nValid arguments are:\n  - 'none'\n  - 'time'\n  - 'size'\n", word, option);
 	}
 	return (-1);
@@ -126,7 +132,7 @@ static int	parse_options(int argc, char **argv)
 		{
 			if (len > 2)
 			{
-				OPTIONS_ITER(MATCH_LONG_OPTION,);
+				OPTIONS_ITER(MATCH_LONG_OPTION);
 				if (!count)
 				{
 					ft_dprintf(STDERR_FILENO, PROGRAM_NAME ": unrecognized option '%s'\n", argv[i]);
@@ -135,7 +141,7 @@ static int	parse_options(int argc, char **argv)
 				if (count >= 2)
 				{
 					ft_dprintf(STDERR_FILENO, PROGRAM_NAME ": option '%s' is ambiguous; possibilities:", argv[i]);
-					OPTIONS_ITER(PRINT_AMBIGUOUS,);
+					OPTIONS_ITER(PRINT_AMBIGUOUS);
 					ft_dprintf(STDERR_FILENO, "\n");
 					return (-1);
 				}
@@ -148,7 +154,7 @@ static int	parse_options(int argc, char **argv)
 			{
 				switch (argv[i][j])
 				{
-				OPTIONS_ITER(MATCH_SHORT_OPTION,);
+				OPTIONS_ITER(MATCH_SHORT_OPTION);
 				default:
 					ft_dprintf(STDERR_FILENO, PROGRAM_NAME ": invalid option -- '%c'\n", argv[i][j]);
 					return (-1);
