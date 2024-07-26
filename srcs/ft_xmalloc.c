@@ -31,7 +31,7 @@ void	*ft_xcalloc(size_t size)
 	return (p);
 }
 
-char	*safe_strdup(const char *s)
+char	*ft_xstrdup(const char *s)
 {
 	char	*p = ft_strdup(s);
 	if (!p)

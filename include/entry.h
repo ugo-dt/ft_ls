@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:15:46 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/07/25 19:11:48 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/26 13:28:33 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,6 @@
 # include "colors.h"
 # include "file.h"
 # include "state.h"
-# include "ft_xmalloc.h"
-# include <errno.h>
-# include <grp.h>
-# include <libft.h>
-# include <pwd.h>
-# include <stdbool.h>
-# include <string.h>
-# include <sys/stat.h>
-# include <sys/types.h>
-# include <time.h>
 
 # ifdef __linux__
 #  include <sys/sysmacros.h>

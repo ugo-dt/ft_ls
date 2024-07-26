@@ -6,7 +6,7 @@
 #    By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/03 10:37:21 by ugdaniel          #+#    #+#              #
-#    Updated: 2024/05/24 14:19:37 by ugdaniel         ###   ########.fr        #
+#    Updated: 2024/07/26 12:41:41 by ugdaniel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ CC = clang
 CFLAGS = -Wall -Wextra -Werror -pedantic
 
 SRCS  = srcs/main.c \
+		srcs/colors.c \
 		srcs/directory.c \
 		srcs/entry.c \
 		srcs/file.c \

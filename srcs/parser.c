@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:20:44 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/07/26 12:38:23 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/26 12:40:22 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -322,5 +322,7 @@ int	parse_arguments(int argc, char **argv, t_list **files, t_list **dirs)
 		reverse_list(files);
 		reverse_list(dirs);
 	}
+	if (state.color_type == color_always || (state.color_type == color_auto && isatty(STDOUT_FILENO)))
+		state.show_colors = true;
 	return (0);
 }

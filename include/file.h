@@ -6,14 +6,12 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:24:23 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/23 16:02:47 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/26 13:30:52 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILE_H
 # define FILE_H
-
-# define PROGRAM_NAME		"ft_ls"
 
 # ifdef __APPLE__
 #  define _DARWIN_C_SOURCE	1
@@ -27,12 +25,6 @@
 #define NSEC_PER_SEC 1000000000
 
 # include "state.h"
-
-# include <errno.h>
-# include <stdbool.h>
-# include <string.h>
-# include <sys/stat.h>
-# include <sys/types.h>
 
 static inline void	show_errno_error(const char *path)
 {

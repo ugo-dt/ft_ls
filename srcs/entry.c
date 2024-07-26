@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:14:56 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/07/26 09:47:31 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/26 12:58:44 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ void entry_print(struct Entry *entry)
 		print_date(&entry->statbuf);
 		ft_putchar(' ');
 	}
-	// if (state.color_type == color_always)
-	// 	ft_printf("%s%s" COLOR_DEFAULT, get_entry_color(entry->statbuf.st_mode), entry->name);
-	// else
+	if (state.show_colors)
+		ft_printf("%s%s" COLOR_DEFAULT, get_entry_color(entry->statbuf.st_mode), entry->name);
+	else
 		ft_putstr(entry->name);
 	if (state.options & OPTION_LONG && is_entry_symbolic_link(entry))
 	{
@@ -104,10 +104,10 @@ struct Entry *entry_create(const char *name, const char *full_path)
 	struct Entry *_new_entry = ft_xcalloc(sizeof(struct Entry));
 
 	if (name)
-		_new_entry->name = ft_strdup(name);
+		_new_entry->name = ft_xstrdup(name);
 	if (full_path)
 	{
-		_new_entry->full_path = ft_strdup(full_path);
+		_new_entry->full_path = ft_xstrdup(full_path);
 		long len;
 		if (do_stat(full_path, &_new_entry->statbuf) != 0)
 		{

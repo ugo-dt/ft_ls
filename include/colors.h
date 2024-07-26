@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 18:48:08 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/07/26 09:47:29 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/26 13:25:50 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,33 +61,8 @@ ec	ENDCODE, END	Non-filename text
 *.extension	 	Every file using this extension e.g. *.jpg
 */
 
-// const char *get_entry_color(mode_t mode)
-// {
-// 	switch (mode & S_IFMT)
-// 	{
-// 	case S_IFREG: // Normal file
-// 		break;
-// 	case S_IFBLK: // Block device
-// 		break;
-// 	case S_IFCHR: // Character device
-// 		break;
-// 	case S_IFDIR: // Directory
-// 		break;
-// 	case S_IFLNK: // Symbolic link
-// 		break;
-// 	case S_IFSOCK: // Socket
-// 		break;
-// 	case S_IFIFO: // Named pipe
-// 		break;
-// 	default:
-// 		break;
-// 	}
-// 	return "";
-// }
+const char *get_entry_color(mode_t mode);
 
-// void	parse_dircolors(const char *dircolors)
-// {
-// 	const char *p = dircolors;
-// }
+void		parse_dircolors(const char *dircolors);
 
 #endif // COLORS_H

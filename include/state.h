@@ -6,16 +6,32 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:21:45 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/07/26 11:22:13 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/26 13:31:25 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STATE_H
 # define STATE_H
 
+# define LIBFT_MALLOC	ft_xmalloc
 # include <libft.h>
+
+# include <dirent.h>
+# include <errno.h>
+# include <grp.h>
+# include <pwd.h>
 # include <stdbool.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/stat.h>
+# include <sys/types.h>
 # include <time.h>
+
+void	*ft_xmalloc(size_t size);
+void	*ft_xcalloc(size_t size);
+char	*ft_xstrdup(const char *s);
+
+# define PROGRAM_NAME	"ft_ls"
 
 # define OPTIONS_ITER(_ITER_F, ...)																														\
 	/*      OPTION_NAME				CODE		SHORT	LONG				REMOVES_OPTION		IMPLIES_OPTION		IMPLIES_SORT */						\
@@ -84,6 +100,7 @@ struct State
 	bool			show_dir_names;
 	struct timespec	current_time;
 	bool			add_newline;
+	bool			show_colors;
 
 	struct
 	{
