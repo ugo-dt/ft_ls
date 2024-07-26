@@ -138,7 +138,7 @@ run_tests()
 
 	# These take longer to complete
 	# diff <(./ft_ls -artRl /usr/lib) <(ls -artRl /usr/lib) || (echo "KO" && exit 1)
-	# diff <(./ft_ls -artRl /usr) <(ls -artRl /usr) || (echo "KO" && exit 1)
+	#diff <(./ft_ls -artRl /usr) <(ls -artRl /usr) || (echo "KO" && exit 1)
 
 	set +x
 	echo "OK"

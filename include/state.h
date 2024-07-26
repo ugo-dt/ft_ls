@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:21:45 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/24 14:21:22 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/26 11:22:13 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,33 +17,41 @@
 # include <stdbool.h>
 # include <time.h>
 
-# define OPTIONS_ITER(_ITER_F, ...)                                                                                                      \
-	/*      NAME				CODE	SHORT LONG				REMOVES_OPTION		IMPLIES_OPTION		IMPLIES_SORT */                  \
-	_ITER_F(ALL,				0x1,	'a', "--all",			OPTION_ALMOST_ALL,	0x0,				0x0,				__VA_ARGS__) \
-	_ITER_F(ALMOST_ALL,			0x2,	'A', "--almost-all",	OPTION_ALL, 		0x0,				0x0,				__VA_ARGS__) \
-	_ITER_F(DIRECTORY_ORDER,	0x4,	'f', "\0",				0x0,				OPTION_ALL,			OPTION_SORT_NONE,	__VA_ARGS__) \
-	_ITER_F(FORMAT,				0x8,	0,   "--format",		0x0,				0x0,				0x0,				__VA_ARGS__) \
-	_ITER_F(HIDE_OWNER,			0x10,	'g', "\0",				0x0,				OPTION_LONG,		0x0,				__VA_ARGS__) \
-	_ITER_F(LONG,				0x20,	'l', "\0",				0x0,				0x0,				0x0,				__VA_ARGS__) \
-	_ITER_F(HIDE_GROUP,			0x40,	'o', "\0",				0x0,				OPTION_LONG,		0x0,				__VA_ARGS__) \
-	_ITER_F(REVERSE,			0x80,	'r', "--reverse",		0x0,				0x0,				0x0,				__VA_ARGS__) \
-	_ITER_F(RECURSIVE,			0x100,	'R', "--recursive",		0x0,				0x0,				0x0,				__VA_ARGS__) \
-	_ITER_F(PRINT_SIZE,			0x200,	's', "--size",			0x0,				0x0,				0x0,				__VA_ARGS__) \
-	_ITER_F(SORT,				0x400,	1,   "--sort",			0x0,				0x0,				0x0,				__VA_ARGS__) \
-	_ITER_F(SORT_BY_SIZE,		0x800,	'S', "\0",				0x0,				0x0,				0x0,				__VA_ARGS__) \
-	_ITER_F(SORT_BY_TIME,		0x1000,	't', "\0",				0x0,				0x0,				0x0,				__VA_ARGS__) \
-	_ITER_F(SORT_NONE,			0x2000,	'U', "\0",				0x0,				0x0,				0x0,				__VA_ARGS__)
+# define OPTIONS_ITER(_ITER_F, ...)																														\
+	/*      OPTION_NAME				CODE		SHORT	LONG				REMOVES_OPTION		IMPLIES_OPTION		IMPLIES_SORT */						\
+	_ITER_F(OPTION_ALL,				0x1,		'a',	"--all",			OPTION_ALMOST_ALL,	0x0,				0x0,				__VA_ARGS__)	\
+	_ITER_F(OPTION_ALMOST_ALL,		0x2,		'A',	"--almost-all",		OPTION_ALL, 		0x0,				0x0,				__VA_ARGS__)	\
+	_ITER_F(OPTION_COLOR,			0x4,		0,  	"--color",			0x0, 				0x0,				0x0,				__VA_ARGS__)	\
+	_ITER_F(OPTION_COLOR_NEVER,		0x8,		1,  	"\0",				0x0, 				0x0,				0x0,				__VA_ARGS__)	\
+	_ITER_F(OPTION_COLOR_ALWAYS,	0x10,		2,  	"\0",				0x0, 				0x0,				0x0,				__VA_ARGS__)	\
+	_ITER_F(OPTION_COLOR_AUTO,		0x20,		3,  	"\0",				0x0, 				0x0,				0x0,				__VA_ARGS__)	\
+	_ITER_F(OPTION_DIRECTORY_ORDER,	0x40,		'f',	"\0",				0x0,				OPTION_ALL,			OPTION_SORT_NONE,	__VA_ARGS__)	\
+	_ITER_F(OPTION_FORMAT,			0x80,		4,		"--format",			0x0,				0x0,				0x0,				__VA_ARGS__)	\
+	_ITER_F(OPTION_HIDE_OWNER,		0x100,		'g',	"\0",				0x0,				OPTION_LONG,		0x0,				__VA_ARGS__)	\
+	_ITER_F(OPTION_LONG,			0x200,		'l',	"\0",				0x0,				0x0,				0x0,				__VA_ARGS__)	\
+	_ITER_F(OPTION_HIDE_GROUP,		0x400,		'o',	"\0",				0x0,				OPTION_LONG,		0x0,				__VA_ARGS__)	\
+	_ITER_F(OPTION_REVERSE,			0x800,		'r',	"--reverse",		0x0,				0x0,				0x0,				__VA_ARGS__)	\
+	_ITER_F(OPTION_RECURSIVE,		0x1000,		'R',	"--recursive",		0x0,				0x0,				0x0,				__VA_ARGS__)	\
+	_ITER_F(OPTION_PRINT_SIZE,		0x2000,		's',	"--size",			0x0,				0x0,				0x0,				__VA_ARGS__)	\
+	_ITER_F(OPTION_SORT,			0x4000,		5,		"--sort",			0x0,				0x0,				0x0,				__VA_ARGS__)	\
+	_ITER_F(OPTION_SORT_BY_SIZE,	0x8000,		'S',	"\0",				0x0,				0x0,				0x0,				__VA_ARGS__)	\
+	_ITER_F(OPTION_SORT_BY_TIME,	0x10000,	't',	"\0",				0x0,				0x0,				0x0,				__VA_ARGS__)	\
+	_ITER_F(OPTION_SORT_NONE,		0x20000,	'U',	"\0",				0x0,				0x0,				0x0,				__VA_ARGS__)
 
-# define FORMATS_ITER(_ITER_F, ...)          \
-	_ITER_F(LONG,    OPTION_LONG, "long")    \
-	_ITER_F(VERBOSE, OPTION_LONG, "verbose")
+# define COLORS_ITER(_ITER_F)									\
+	_ITER_F(OPTION_COLOR_ALWAYS,	"always", "yes", "force")	\
+	_ITER_F(OPTION_COLOR_NEVER,		"never", "no", "none")		\
+	_ITER_F(OPTION_COLOR_AUTO,		"auto", "tty", "if-tty")
 
-# define SORTS_ITER(_ITER_F, ...)              \
-	_ITER_F(NONE, OPTION_SORT_NONE, "none")    \
-	_ITER_F(SIZE, OPTION_SORT_BY_SIZE, "size") \
-	_ITER_F(TIME, OPTION_SORT_BY_TIME, "time")
+# define FORMATS_ITER(_ITER_F)					\
+	_ITER_F(OPTION_LONG,	"verbose", "long")	\
 
-# define DECL_OPTION_ENUM_MEMBER(_name, _code, ...)	OPTION_##_name = _code,
+# define SORTS_ITER(_ITER_F)				\
+	_ITER_F(OPTION_SORT_NONE,		"none")	\
+	_ITER_F(OPTION_SORT_BY_SIZE,	"size")	\
+	_ITER_F(OPTION_SORT_BY_TIME,	"time")
+
+# define DECL_OPTION_ENUM_MEMBER(_name, _code, ...)	_name = _code,
 
 enum Option
 {
@@ -51,7 +59,7 @@ enum Option
 	LAST_OPTION = OPTION_SORT_NONE,
 };
 
-enum sort_type
+enum SortType
 {
 	sort_by_name = 0x0, // default
 	sort_by_time = OPTION_SORT_BY_TIME,
@@ -59,11 +67,19 @@ enum sort_type
 	sort_none    = OPTION_SORT_NONE,
 };
 
+enum ColorType
+{
+	color_never = OPTION_COLOR_NEVER, // default
+	color_auto = OPTION_COLOR_AUTO,
+	color_always = OPTION_COLOR_ALWAYS
+};
+
 struct State
 {
 	int				exit_value;
 	uint32_t		options;
-	enum sort_type	sort_type;
+	enum SortType	sort_type;
+	enum ColorType	color_type;
 	t_list			*files;
 	bool			show_dir_names;
 	struct timespec	current_time;

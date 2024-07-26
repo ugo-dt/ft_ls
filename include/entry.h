@@ -6,13 +6,14 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:15:46 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/23 16:18:33 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/25 19:11:48 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENTRY_H
 # define ENTRY_H
 
+# include "colors.h"
 # include "file.h"
 # include "state.h"
 # include "ft_xmalloc.h"

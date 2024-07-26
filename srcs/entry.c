@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:14:56 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/24 14:19:25 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/26 09:47:31 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ void entry_print(struct Entry *entry)
 		print_date(&entry->statbuf);
 		ft_putchar(' ');
 	}
-	ft_putstr(entry->name);
+	// if (state.color_type == color_always)
+	// 	ft_printf("%s%s" COLOR_DEFAULT, get_entry_color(entry->statbuf.st_mode), entry->name);
+	// else
+		ft_putstr(entry->name);
 	if (state.options & OPTION_LONG && is_entry_symbolic_link(entry))
 	{
 		char buffer[1024];

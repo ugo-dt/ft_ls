@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_xmalloc.h"
+# include <libft.h>
+# include <stdlib.h>
 
 void	*ft_xmalloc(size_t size)
 {
@@ -27,5 +28,16 @@ void	*ft_xcalloc(size_t size)
 {
 	void	*p = ft_xmalloc(size);
 	ft_bzero(p, size);
+	return (p);
+}
+
+char	*safe_strdup(const char *s)
+{
+	char	*p = ft_strdup(s);
+	if (!p)
+	{
+		ft_putendl_fd("\nfatal: out of memory", STDERR_FILENO);
+		exit(EXIT_FAILURE);
+	}
 	return (p);
 }
