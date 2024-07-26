@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:20:44 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/07/26 12:27:42 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/26 12:37:30 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 #define MATCH_OPTION_ARGUMENT(_code, ...)							\
 	do																\
 	{																\
+		match = false;												\
 		char *_args[] = {__VA_ARGS__};								\
 		size_t _num_args = sizeof(_args) / sizeof(_args[0]);		\
 		for (size_t _i = 0; _i < _num_args; ++_i)					\
@@ -57,15 +58,19 @@
 				else												\
 					state.options |= _code;							\
 				state.options |= _code;								\
-				count++;											\
+				match = true;										\
+				break ;												\
 			}														\
 		}															\
+		if (match)													\
+			count++;												\
 	} while (0);
 
 static inline int match_word(char *word, char *option)
 {
 	if (!word)
 	{
+		// Color is 'always' when no arguments are specified
 		if (option && ft_strcmp(option, "--color") == 0)
 		{
 			state.color_type = color_always;
@@ -75,7 +80,8 @@ static inline int match_word(char *word, char *option)
 		return (-1);
 	}
 
-	size_t count = 0;
+	uint32_t	count = 0;
+	bool		match;
 	if (ft_strcmp(option, "--format") == 0)
 		DO_FORMATS_ITER(MATCH_OPTION_ARGUMENT);
 	else if (ft_strcmp(option, "--sort") == 0)
@@ -100,54 +106,54 @@ static inline int match_word(char *word, char *option)
 	return (-1);
 }
 
-#define MATCH_LONG_OPTION(_name, _code, _short, _long, _removes, ...)										\
-	do																										\
-	{																										\
-		if (!argv[i])																						\
-			return (0);																						\
-		char *_eq = ft_strchr(argv[i], '=');																\
-		size_t _len_to_eq;																					\
-		if (_eq)																							\
-			_len_to_eq = _eq - argv[i];																		\
-		else																								\
-			_len_to_eq = len;																				\
-		if (																								\
+#define MATCH_LONG_OPTION(_name, _code, _short, _long, _removes, ...)																				\
+	do																																				\
+	{																																				\
+		if (!argv[i])																																\
+			return (0);																																\
+		char *_eq = ft_strchr(argv[i], '=');																										\
+		size_t _len_to_eq;																															\
+		if (_eq)																																	\
+			_len_to_eq = _eq - argv[i];																												\
+		else																																		\
+			_len_to_eq = len;																														\
+		if (																																		\
 			(_code == OPTION_FORMAT && ((_eq && ft_strncmp(argv[i], "--format", (_eq - argv[i])) == 0) || ft_strncmp(argv[i], _long, len) == 0)) ||	\
 			(_code == OPTION_SORT   && ((_eq && ft_strncmp(argv[i], "--sort",   (_eq - argv[i])) == 0) || ft_strncmp(argv[i], _long, len) == 0)) ||	\
 			(_code == OPTION_COLOR  && ((_eq && ft_strncmp(argv[i], "--color",  (_eq - argv[i])) == 0) || ft_strncmp(argv[i], _long, len) == 0))	\
-		)																									\
-		{																									\
-			char *_word;																					\
-			if (!_eq)																						\
-			{																								\
-				i++;																						\
-				_word = argv[i];																			\
-			}																								\
-			else																							\
-			{																								\
-				len--;																						\
-				_word = _eq + 1;																			\
-			}																								\
-			if (match_word(_word, _long) == 0)																\
-			{																								\
-				state.options |= _code;																		\
-				should_continue = true;																		\
-			}																								\
-			else																							\
-				return (-1);																				\
-		}																									\
-		else if (ft_strncmp(argv[i], _long, _len_to_eq) == 0)												\
-		{																									\
-			if (_eq)																						\
-			{																								\
-				ft_dprintf(STDERR_FILENO, PROGRAM_NAME ": option '%s' doesn't allow an argument\n", _long);	\
-				return (-1);																				\
-			}																								\
-			state.options |= _code;																			\
-			if (_removes)																					\
-				state.options &= ~(_removes);																\
-			should_continue = true;																			\
-		}																									\
+		)																																			\
+		{																																			\
+			char *_word;																															\
+			if (!_eq)																																\
+			{																																		\
+				i++;																																\
+				_word = argv[i];																													\
+			}																																		\
+			else																																	\
+			{																																		\
+				len--;																																\
+				_word = _eq + 1;																													\
+			}																																		\
+			if (match_word(_word, _long) == 0)																										\
+			{																																		\
+				state.options |= _code;																												\
+				should_continue = true;																												\
+			}																																		\
+			else																																	\
+				return (-1);																														\
+		}																																			\
+		else if (ft_strncmp(argv[i], _long, _len_to_eq) == 0)																						\
+		{																																			\
+			if (_eq)																																\
+			{																																		\
+				ft_dprintf(STDERR_FILENO, PROGRAM_NAME ": option '%s' doesn't allow an argument\n", _long);											\
+				return (-1);																														\
+			}																																		\
+			state.options |= _code;																													\
+			if (_removes)																															\
+				state.options &= ~(_removes);																										\
+			should_continue = true;																													\
+		}																																			\
 	} while (0);
 
 #define MATCH_SHORT_OPTION(_name, _code, _short, _long, _removes, _implies, _sort, ...)	\
@@ -316,5 +322,6 @@ int	parse_arguments(int argc, char **argv, t_list **files, t_list **dirs)
 		reverse_list(files);
 		reverse_list(dirs);
 	}
+	ft_printf("color: %d\n", state.color_type);
 	return (0);
 }

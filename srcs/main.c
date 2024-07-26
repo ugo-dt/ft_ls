@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 21:32:13 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/05/24 14:13:38 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/26 12:31:28 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int main(int argc, char **argv)
 	files = NULL;
 	dirs = NULL;
 	ft_memset(&state, 0, sizeof(state));
+	state.color_type = color_never;
 	parse_arguments(argc, argv, &files, &dirs);
 	list_contents(files);
 	list_contents(dirs);
