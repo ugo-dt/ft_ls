@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:20:44 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/07/26 12:40:22 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/27 13:56:31 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,6 @@ static inline int match_word(char *word, char *option)
 {
 	if (!word)
 	{
-		// Color is 'always' when no arguments are specified
-		if (option && ft_strcmp(option, "--color") == 0)
-		{
-			state.color_type = color_always;
-			return (0);
-		}
 		ft_dprintf(STDERR_FILENO, PROGRAM_NAME ": option '%s' requires an argument\n", option);
 		return (-1);
 	}
@@ -123,6 +117,13 @@ static inline int match_word(char *word, char *option)
 			(_code == OPTION_COLOR  && ((_eq && ft_strncmp(argv[i], "--color",  (_eq - argv[i])) == 0) || ft_strncmp(argv[i], _long, len) == 0))	\
 		)																																			\
 		{																																			\
+			/* Color is 'always' when no arguments are specified */\
+			if (ft_strncmp(argv[i], "--color", len) == 0 && !_eq)\
+			{\
+				state.color_type = color_always;\
+				should_continue = true;\
+				break;\
+			}\
 			char *_word;																															\
 			if (!_eq)																																\
 			{																																		\

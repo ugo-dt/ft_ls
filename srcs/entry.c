@@ -6,13 +6,80 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:14:56 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/07/26 12:58:44 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/27 15:05:13 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entry.h"
+# include "file.h"
 
-void entry_print(struct Entry *entry)
+/*
+lc	LEFTCODE, LEFT	Opening terminal code
+rc	RIGHTCODE, RIGHT	Closing terminal code
+ec	ENDCODE, END	Non-filename text
+ex	*.extension	 	Every file using this extension e.g. *.jpg
+*/
+
+const char	*get_entry_color(struct Entry *entry)
+{
+	struct stat s;
+
+	if (entry->is_link)
+	{
+		char	target_path[PATH_MAX];
+		ssize_t len;
+		len = readlink(entry->full_path, target_path, sizeof(target_path) - 1);
+		if (len == -1)
+			return state.colors.mi;
+		target_path[len] = '\0';
+		if (stat(target_path, &s) != 0)
+		{
+			if (errno == ENOENT)
+				// return COLOR_40 COLOR_91;
+				return state.colors.or;
+			else
+				return state.colors.mi;
+		}
+		return state.colors.ln;
+	}
+
+	switch (entry->statbuf.st_mode & S_IFMT)
+	{
+	case S_IFREG: // Normal file
+		if (entry->statbuf.st_mode & S_ISUID) // setuid
+			return state.colors.su;
+		if (entry->statbuf.st_mode & S_ISGID) // setgid
+			return state.colors.sg;
+		if (entry->statbuf.st_mode & S_IXUSR) // executable
+			return state.colors.ex;
+		return state.colors.fi;
+	case S_IFBLK: // Block device
+		return state.colors.bd;
+	case S_IFCHR: // Character device
+		return state.colors.cd;
+	case S_IFDIR: // Directory
+		if (entry->statbuf.st_mode & S_IWOTH && entry->statbuf.st_mode & S_ISVTX) // other-writable and sticky
+			return state.colors.tw;
+		if (entry->statbuf.st_mode & S_IWOTH && !(entry->statbuf.st_mode & S_ISVTX)) // other-writable and not sticky
+			return state.colors.ow;
+		if (!(entry->statbuf.st_mode & S_IWOTH) && entry->statbuf.st_mode & S_ISVTX) // not other-writable sticky
+			return state.colors.st;
+		return state.colors.di;
+	case S_IFLNK: // Symbolic link
+		if (stat(entry->full_path, &s) != 0)
+			return state.colors.or;
+		return state.colors.ln;
+	case S_IFSOCK: // Socket
+		return state.colors.so;
+	case S_IFIFO: // Named pipe
+		return state.colors.pi;
+	default:
+		return state.colors.no;
+	}
+	return state.colors.no;
+}
+
+void	entry_print(struct Entry *entry)
 {
 	if (!entry || !entry->name)
 		return;
@@ -57,7 +124,16 @@ void entry_print(struct Entry *entry)
 		ft_putchar(' ');
 	}
 	if (state.show_colors)
-		ft_printf("%s%s" COLOR_DEFAULT, get_entry_color(entry->statbuf.st_mode), entry->name);
+	{
+		bool first = !state.current_color;
+		state.current_color = get_entry_color(entry);
+		if (first && state.current_color)
+			ft_putstr(COLOR_RESET);
+		if (state.current_color)
+			ft_printf("%s%s%s", state.current_color, entry->name, COLOR_RESET);
+		else
+			ft_putstr(entry->name);
+	}
 	else
 		ft_putstr(entry->name);
 	if (state.options & OPTION_LONG && is_entry_symbolic_link(entry))
@@ -109,7 +185,7 @@ struct Entry *entry_create(const char *name, const char *full_path)
 	{
 		_new_entry->full_path = ft_xstrdup(full_path);
 		long len;
-		if (do_stat(full_path, &_new_entry->statbuf) != 0)
+		if (do_stat(full_path, &_new_entry->statbuf, &_new_entry->is_link) != 0)
 		{
 			show_errno_error(_new_entry->name);
 			entry_destroy(_new_entry);

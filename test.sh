@@ -59,6 +59,11 @@ run_bonus()
 	diff <(./ft_ls --fo l /bin) <(ls --fo l /bin) || (echo "KO" && exit 1)
 	diff <(./ft_ls --fo verb /bin) <(ls --fo verb /bin) || (echo "KO" && exit 1)
 
+	diff <(./ft_ls --color) <(ls --color) || (echo "KO" && exit 1)
+	diff <(./ft_ls --color=auto) <(ls --color=auto) || (echo "KO" && exit 1)
+	diff <(./ft_ls --color=yes) <(ls --color=yes) || (echo "KO" && exit 1)
+	diff <(./ft_ls --color=no) <(ls --color=no) || (echo "KO" && exit 1)
+
 	echo "BONUS OK"
 }
 

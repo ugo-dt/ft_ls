@@ -6,20 +6,25 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:20:03 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/07/25 19:42:51 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/27 13:41:23 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "file.h"
 
-int do_stat(const char *path, struct stat *buf)
+int do_stat(const char *path, struct stat *buf, bool *is_link)
 {
 	int			result;
 	struct stat	tmp;
 
+	if (is_link)
+		*is_link = false;
+
 	result = lstat(path, &tmp);
 	if (result != 0)
 		return (result);
+	if (is_link && S_ISLNK(tmp.st_mode))
+		*is_link = true;
 
 	if (state.options & OPTION_LONG)
 	{

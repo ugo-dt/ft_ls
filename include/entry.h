@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:15:46 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/07/26 13:28:33 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/27 13:31:54 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,12 @@
 
 struct Entry
 {
-	char          *name;
-	char          *full_path;
-	struct stat   statbuf;
-	struct group  *grp;
-	struct passwd *pwd;
+	char         	*name;
+	char         	*full_path;
+	struct stat  	statbuf;
+	struct group 	*grp;
+	struct passwd	*pwd;
+	bool			is_link;
 };
 
 struct Entry *entry_create(const char *name, const char *full_path);

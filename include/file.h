@@ -6,23 +6,12 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:24:23 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/07/26 13:30:52 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/27 13:31:36 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILE_H
 # define FILE_H
-
-# ifdef __APPLE__
-#  define _DARWIN_C_SOURCE	1
-#  define BLOCKS_SHIFT_BY	0
-#  define st_mtim			st_mtimespec
-# elif __linux__
-#  define _DEFAULT_SOURCE	1
-#  define BLOCKS_SHIFT_BY	1
-# endif
-
-#define NSEC_PER_SEC 1000000000
 
 # include "state.h"
 
@@ -40,7 +29,7 @@ static inline void	show_errno_error(const char *path)
 	state.exit_value = EXIT_FAILURE;
 }
 
-int		do_stat(const char *path, struct stat *buf);
+int		do_stat(const char *path, struct stat *buf, bool *is_link);
 void	print_file_type(mode_t mode);
 void	print_owner_permissions(mode_t mode);
 void	print_group_permissions(mode_t mode);

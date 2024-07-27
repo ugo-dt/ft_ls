@@ -6,18 +6,25 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:21:45 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/07/26 13:31:25 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/27 15:03:26 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STATE_H
 # define STATE_H
 
-# define LIBFT_MALLOC	ft_xmalloc
-# include <libft.h>
+# ifdef __APPLE__
+#  define _DARWIN_C_SOURCE	1
+#  define BLOCKS_SHIFT_BY	0
+#  define st_mtime			st_mtimespec
+# elif __linux__
+#  define _DEFAULT_SOURCE	1
+#  define BLOCKS_SHIFT_BY	1
+# endif
 
 # include <dirent.h>
 # include <errno.h>
+# include <libft.h>
 # include <grp.h>
 # include <pwd.h>
 # include <stdbool.h>
@@ -32,6 +39,7 @@ void	*ft_xcalloc(size_t size);
 char	*ft_xstrdup(const char *s);
 
 # define PROGRAM_NAME	"ft_ls"
+# define NSEC_PER_SEC	1000000000
 
 # define OPTIONS_ITER(_ITER_F, ...)																														\
 	/*      OPTION_NAME				CODE		SHORT	LONG				REMOVES_OPTION		IMPLIES_OPTION		IMPLIES_SORT */						\
@@ -90,17 +98,45 @@ enum ColorType
 	color_always = OPTION_COLOR_ALWAYS
 };
 
+struct LS_Colors
+{
+	char *no;
+	char *fi;
+	char *di;
+	char *ln;
+	char *pi;
+	char *door;
+	char *bd;
+	char *cd;
+	char *or;
+	char *so;
+	char *su;
+	char *sg;
+	char *tw;
+	char *ow;
+	char *st;
+	char *ex;
+	char *mi;
+	char *lc;
+	char *rc;
+	char *ec;
+	char **extensions;
+};
+
 struct State
 {
-	int				exit_value;
-	uint32_t		options;
-	enum SortType	sort_type;
-	enum ColorType	color_type;
-	t_list			*files;
-	bool			show_dir_names;
-	struct timespec	current_time;
-	bool			add_newline;
-	bool			show_colors;
+	int					exit_value;
+	uint32_t			options;
+	enum SortType		sort_type;
+	enum ColorType		color_type;
+	t_list				*files;
+	bool				show_dir_names;
+	struct timespec		current_time;
+	bool				add_newline;
+	bool				show_colors;
+	const char			*current_color;
+
+	struct LS_Colors	colors;
 
 	struct
 	{
