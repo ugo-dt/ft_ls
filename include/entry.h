@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:15:46 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/07/27 13:31:54 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/27 15:15:38 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,6 @@
 # ifdef __linux__
 #  include <sys/sysmacros.h>
 # endif
-
-#ifdef __GNUC__
-# if __has_warning("-Wgnu-statement-expression-from-macro-expansion")
-#  pragma GCC diagnostic ignored	"-Wgnu-statement-expression-from-macro-expansion"
-# endif
-# if __has_warning("-Wgnu-statement-expression")
-#  pragma GCC diagnostic ignored	"-Wgnu-statement-expression"
-# endif
-# if __has_warning("-Wlanguage-extension-token")
-#  pragma GCC diagnostic ignored	"-Wlanguage-extension-token"
-# endif
-#endif // __GNUC
 
 # define _SKIP_IMPLIED(_name) \
 	(state.options & OPTION_ALMOST_ALL && (!ft_strcmp(_name, ".") || !ft_strcmp(_name, "..")))
@@ -49,16 +37,16 @@ struct Entry
 	bool			is_link;
 };
 
-struct Entry *entry_create(const char *name, const char *full_path);
-void          entry_print(struct Entry *entry);
-void          entry_destroy(void *entry);
+struct Entry*	entry_create(const char *name, const char *full_path);
+void			entry_print(struct Entry *entry);
+void			entry_destroy(void *entry);
 
-int           compare_entries_by_name(const struct Entry *a, const struct Entry *b);
-int           compare_entries_by_time(const struct Entry *a, const struct Entry *b);
-int           compare_entries_by_size(const struct Entry *a, const struct Entry *b);
+int				compare_entries_by_name(const struct Entry *a, const struct Entry *b);
+int				compare_entries_by_time(const struct Entry *a, const struct Entry *b);
+int				compare_entries_by_size(const struct Entry *a, const struct Entry *b);
 
-bool          is_entry_symbolic_link(struct Entry *entry);
-bool          is_entry_regular(struct Entry *entry);
-bool          is_entry_directory(struct Entry *entry);
+bool			is_entry_symbolic_link(struct Entry *entry);
+bool			is_entry_regular(struct Entry *entry);
+bool			is_entry_directory(struct Entry *entry);
 
 #endif // ENTRY_H

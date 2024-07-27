@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:14:56 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/07/27 15:05:13 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/27 15:15:08 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # include "file.h"
 
 /*
+TODO
 lc	LEFTCODE, LEFT	Opening terminal code
 rc	RIGHTCODE, RIGHT	Closing terminal code
 ec	ENDCODE, END	Non-filename text
@@ -149,30 +150,30 @@ void	entry_print(struct Entry *entry)
 	ft_putchar('\n');
 }
 
-#define GET_NUMBER_LENGTH(len_ptr_, nb_, base_) \
-	do                                          \
-	{                                           \
-		(*(len_ptr_)) = 1;                      \
-		typeof(nb_) tmp_ = nb_;                 \
-		if (tmp_ < 0)                           \
-		{                                       \
-			(*(len_ptr_))++;                    \
-			tmp_ = -tmp_;                       \
-		}                                       \
-		while (tmp_ >= base_)                   \
-		{                                       \
-			tmp_ /= base_;                      \
-			(*(len_ptr_))++;                    \
-		}                                       \
+#define GET_NUMBER_LENGTH(len_ptr_, nb_, base_)	\
+	do											\
+	{											\
+		(*(len_ptr_)) = 1;						\
+		LIBFT_TYPEOF(nb_) tmp_ = nb_;			\
+		if (tmp_ < 0)							\
+		{										\
+			(*(len_ptr_))++;					\
+			tmp_ = -tmp_;						\
+		}										\
+		while (tmp_ >= base_)					\
+		{										\
+			tmp_ /= base_;						\
+			(*(len_ptr_))++;					\
+		}										\
 	} while (0)
 
-# define _SET_WIDTH(_width, _number) \
-	do \
-	{ \
-		long len_; \
-		GET_NUMBER_LENGTH(&len_, _number, 10); \
-		if (_width < len_) \
-			_width = len_; \
+# define _SET_WIDTH(_width, _number)			\
+	do											\
+	{											\
+		long len_;								\
+		GET_NUMBER_LENGTH(&len_, _number, 10);	\
+		if (_width < len_)						\
+			_width = len_;						\
 	} while (0)
 
 struct Entry *entry_create(const char *name, const char *full_path)

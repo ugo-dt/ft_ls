@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:22:37 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/07/26 13:29:09 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/27 15:09:47 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@
 
 # define EXIT_INVALID_OPTION	2
 
-int 	parse_arguments(int argc, char **argv, t_list **files, t_list **dirs);
+int	parse_arguments(int argc, char **argv, t_list **files, t_list **dirs);
 
 #endif // PARSER_H

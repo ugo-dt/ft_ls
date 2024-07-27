@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 18:47:45 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/07/27 14:56:48 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/27 15:09:16 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ char	**get_key(LS_Colors *colors, const char *key, size_t len)
 {
 	if (!key)
 		return NULL;
-	// write(1, key, len);
-	// ft_putchar('\n');
 	if (ft_strncmp(key, "no", len) == 0)
 		return &colors->no;
 	if (ft_strncmp(key, "fi", len) == 0)
@@ -61,56 +59,6 @@ char	**get_key(LS_Colors *colors, const char *key, size_t len)
 	return NULL;
 }
 
-const char	*get_color_string(int code)
-{
-	switch (code)
-	{
-		case 0:		return COLOR_0;
-		case 1:		return COLOR_1;
-		case 2:		return COLOR_2;
-		case 3:		return COLOR_3;
-		case 4:		return COLOR_4;
-		case 5:		return COLOR_5;
-		case 6:		return COLOR_6;
-		case 7:		return COLOR_7;
-		case 8:		return COLOR_8;
-		case 39:	return COLOR_39;
-		case 31:	return COLOR_31;
-		case 32:	return COLOR_32;
-		case 33:	return COLOR_33;
-		case 34:	return COLOR_34;
-		case 35:	return COLOR_35;
-		case 36:	return COLOR_36;
-		case 37:	return COLOR_37;
-		case 40:	return COLOR_40;
-		case 41:	return COLOR_41;
-		case 42:	return COLOR_42;
-		case 43:	return COLOR_43;
-		case 44:	return COLOR_44;
-		case 45:	return COLOR_45;
-		case 46:	return COLOR_46;
-		case 47:	return COLOR_47;
-		case 90:	return COLOR_90;
-		case 91:	return COLOR_91;
-		case 92:	return COLOR_92;
-		case 93:	return COLOR_93;
-		case 94:	return COLOR_94;
-		case 95:	return COLOR_95;
-		case 96:	return COLOR_96;
-		case 97:	return COLOR_97;
-		case 100:	return COLOR_100;
-		case 101:	return COLOR_101;
-		case 102:	return COLOR_102;
-		case 103:	return COLOR_103;
-		case 104:	return COLOR_104;
-		case 105:	return COLOR_105;
-		case 106:	return COLOR_106;
-		case 107:	return COLOR_107;
-		default: return "";
-	}
-	return "";
-}
-
 void	parse_dircolors(LS_Colors *colors, const char *p)
 {
 	char	**arr;
@@ -125,7 +73,7 @@ void	parse_dircolors(LS_Colors *colors, const char *p)
 		if (*p == '*')
 		{
 			key = NULL;
-			// extension
+			// todo: extensions
 		}
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:21:45 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/07/27 15:03:26 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/27 15:15:44 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,27 +100,27 @@ enum ColorType
 
 struct LS_Colors
 {
-	char *no;
-	char *fi;
-	char *di;
-	char *ln;
-	char *pi;
-	char *door;
-	char *bd;
-	char *cd;
-	char *or;
-	char *so;
-	char *su;
-	char *sg;
-	char *tw;
-	char *ow;
-	char *st;
-	char *ex;
-	char *mi;
-	char *lc;
-	char *rc;
-	char *ec;
-	char **extensions;
+	char	*no;
+	char	*fi;
+	char	*di;
+	char	*ln;
+	char	*pi;
+	char	*door;
+	char	*bd;
+	char	*cd;
+	char	*or;
+	char	*so;
+	char	*su;
+	char	*sg;
+	char	*tw;
+	char	*ow;
+	char	*st;
+	char	*ex;
+	char	*mi;
+	char	*lc;
+	char	*rc;
+	char	*ec;
+	char	**extensions;
 };
 
 struct State
