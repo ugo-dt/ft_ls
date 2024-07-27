@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 21:32:13 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/07/27 14:58:39 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/27 17:51:01 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 struct State state;
 
-void	clear_dircolors()
+void	clear_dircolors(void)
 {
 	if (state.colors.no)
 		free(state.colors.no);
