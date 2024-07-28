@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:21:45 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/07/28 16:14:33 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/28 16:16:46 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # ifdef __APPLE__
 #  define _DARWIN_C_SOURCE	1
 #  define BLOCKS_SHIFT_BY	0
-#  define st_mtime			st_mtimespec
+#  define st_mtim			st_mtimespec
+#  define PATH_MAX			256
 # elif __linux__
 #  define _DEFAULT_SOURCE	1
 #  define BLOCKS_SHIFT_BY	1
