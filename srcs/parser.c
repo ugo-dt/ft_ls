@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:20:44 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/07/27 13:56:31 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/28 16:12:06 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,11 @@ static inline int match_word(char *word, char *option)
 			state.sort_type = _code;													\
 		else																			\
 			state.options |= _code;														\
+		if (_code == OPTION_DIRECTORY_ORDER)											\
+		{																				\
+			state.sort_type = sort_none;												\
+			state.color_type = color_never;												\
+		}																				\
 		if (_removes)																	\
 			state.options &= ~(_removes);												\
 		break;
@@ -257,6 +262,8 @@ static int	parse_options(int argc, char **argv)
 			}
 		}
 	}
+	if (state.options & OPTION_DIRECTORY_ORDER)
+		state.options &= ~(OPTION_REVERSE);
 	return (EXIT_SUCCESS);
 }
 

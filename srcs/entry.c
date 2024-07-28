@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:14:56 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/07/27 15:15:08 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/28 15:53:45 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,12 +126,16 @@ void	entry_print(struct Entry *entry)
 	}
 	if (state.show_colors)
 	{
-		bool first = !state.current_color;
-		state.current_color = get_entry_color(entry);
-		if (first && state.current_color)
-			ft_putstr(COLOR_RESET);
-		if (state.current_color)
-			ft_printf("%s%s%s", state.current_color, entry->name, COLOR_RESET);
+		const char *color = get_entry_color(entry);
+		if (color)
+		{
+			if (state.first)
+			{
+				ft_putstr(COLOR_RESET);
+				state.first = false;
+			}
+			ft_printf("%s%s%s", color, entry->name, COLOR_RESET);
+		}
 		else
 			ft_putstr(entry->name);
 	}

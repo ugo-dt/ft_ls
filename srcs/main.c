@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 21:32:13 by ugdaniel          #+#    #+#             */
-/*   Updated: 2024/07/27 14:58:39 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2024/07/28 15:52:02 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int main(int argc, char **argv)
 	ft_memset(&state, 0, sizeof(state));
 	parse_dircolors(&state.colors, getenv("LS_COLORS"));
 	state.color_type = color_never;
+	state.first = true;
 	parse_arguments(argc, argv, &files, &dirs);
 	list_contents(files);
 	list_contents(dirs);
