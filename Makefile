@@ -6,72 +6,66 @@
 #    By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/03 10:37:21 by ugdaniel          #+#    #+#              #
-#    Updated: 2024/07/26 12:41:41 by ugdaniel         ###   ########.fr        #
+#    Updated: 2024/07/31 21:35:58 by ugdaniel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_ls
+NAME		= ft_ls
 
-CC = clang
-CFLAGS = -Wall -Wextra -Werror -pedantic
+CC			= clang
+CFLAGS		= -Wall -Wextra -Werror -pedantic
 
-SRCS  = srcs/main.c \
-		srcs/colors.c \
-		srcs/directory.c \
-		srcs/entry.c \
-		srcs/file.c \
-		srcs/list.c \
-		srcs/parser.c \
-		srcs/time.c \
-		srcs/ft_xmalloc.c
-OBJS = $(SRCS:.c=.o)
+SRCS 		=	srcs/main.c			\
+				srcs/colors.c		\
+				srcs/directory.c	\
+				srcs/entry.c		\
+				srcs/file.c			\
+				srcs/list.c			\
+				srcs/parser.c		\
+				srcs/time.c			\
+				srcs/ft_xmalloc.c
 
-LIBFT_DIR = libft
-LIBFT = $(LIBFT_DIR)/libft.a
+OBJS		= $(SRCS:.c=.o)
 
-INCLUDE = -I include -I $(LIBFT_DIR)/include
+LIBFT_DIR	= libft
+LIBFT		= $(LIBFT_DIR)/libft.a
 
-LIBS = $(LIBFT)
+LIBS		= $(LIBFT)
+INCLUDE		= -I include -I $(LIBFT_DIR)/include
 
-__default = \033[39m
-__green = \033[92m
-__magenta = \033[95m
-__yellow = \033[33m
-__blue = \033[34m
-__gray = \033[37m
-__red = \033[91m
-__cyan = \033[96m
+COLOR_DEFAULT	=	\033[39m
+COLOR_GREEN		= 	\033[92m
+COLOR_GREY		= 	\033[90m
 
 ifndef verbose
   SILENT = @
+  NO_PRINT_DIRECTORY = --no-print-directory
 endif
 
-all: $(LIBFT) $(NAME)
+all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	@echo "Linking $(NAME)$(__default)"
 	$(SILENT)$(CC) -o $@ $^ $(LIBS)
-	@echo "$(__green)Successfully built $(NAME)$(__default)"
+	@echo "$(COLOR_GREEN)Successfully built $(NAME)$(COLOR_DEFAULT)"
 
 $(LIBFT):
-	@echo "$(__default)Compiling Libft"
-	$(SILENT)make --no-print-directory -C $(LIBFT_DIR)
-	$(SILENT)make --no-print-directory -C $(LIBFT_DIR) clean
+	$(SILENT)$(MAKE) $(NO_PRINT_DIRECTORY) -C $(LIBFT_DIR)
+	$(SILENT)$(MAKE) $(NO_PRINT_DIRECTORY) -C $(LIBFT_DIR) clean
 
 clean_libft:
-	$(SILENT)make --no-print-directory verbose=$(verbose) fclean -C $(LIBFT_DIR)
+	$(SILENT)$(MAKE) $(NO_PRINT_DIRECTORY) verbose=$(verbose) fclean -C $(LIBFT_DIR)
 
 .c.o:
-	@echo "$(__default)Compiling $<"
+	@echo "$(COLOR_GREY)Compiling $<...$(COLOR_DEFAULT)"
 	$(SILENT)mkdir -p $(dir $@)
 	$(SILENT)$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
 	$(SILENT)rm -f $(OBJS)
 
-fclean: clean
+fclean: clean clean_libft
 	$(SILENT)rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean clean_libft fclean re
