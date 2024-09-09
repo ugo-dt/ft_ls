@@ -171,6 +171,8 @@ do
 	esac
 done
 
+make
+
 if [ "$verbose" = true ]; then
 	set -x
 	run_tests
